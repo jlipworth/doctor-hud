@@ -1,6 +1,6 @@
 import socket
 
-metric_ids = {}
+metric_ids = {"crap": "heart_rate"}
 
 
 def broadcast_input():
@@ -20,10 +20,11 @@ def broadcast_input():
 
 
 def initialize_socket():
-    sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    sock = socket.socket()
     host = socket.gethostname()
     port = 56754
-    sock.bind(host, port)
+    print("host: " + host + " port: " + str(port))
+    sock.bind((host, port))
     sock.listen(5)
     connect, address = sock.accept()
     return connect
