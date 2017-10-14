@@ -1,0 +1,7 @@
+C:\Users\jyqing\source\repos\SocketServerSample\SocketServerSample\bin\Debug\SocketServerSample.exe.config
+C:\Users\jyqing\source\repos\SocketServerSample\SocketServerSample\bin\Debug\SocketServerSample.exe
+C:\Users\jyqing\source\repos\SocketServerSample\SocketServerSample\bin\Debug\SocketServerSample.pdb
+C:\Users\jyqing\source\repos\SocketServerSample\SocketServerSample\obj\Debug\SocketServerSample.csproj.CoreCompileInputs.cache
+C:\Users\jyqing\source\repos\SocketServerSample\SocketServerSample\obj\Debug\SocketServerSample.exe
+C:\Users\jyqing\source\repos\SocketServerSample\SocketServerSample\obj\Debug\SocketServerSample.pdb
+C:\Users\jyqing\source\repos\SocketServerSample\SocketServerSample\obj\Debug\SocketServerSample.csprojResolveAssemblyReference.cache
