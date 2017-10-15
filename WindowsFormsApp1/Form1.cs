@@ -88,19 +88,19 @@ namespace WindowsFormsApp1
 
         }
 
-        // Click this activeX VLC
-        private void metroButton1_Click(object sender, EventArgs e)
-        {
-            axVLCPlugin21.playlist.add("https://youtu.be/MAYMFwjoWy8");
-            //  http cannot be used for live stream. Use RTSP RSP instead.
-            //axVLCPlugin21.playlist.add("https://youtu.be/dovudiWfzMU");
-            Console.WriteLine("****************************************");
-            axVLCPlugin21.playlist.play();
-        }
+        //// Click this activeX VLC
+        //private void metroButton1_Click(object sender, EventArgs e)
+        //{
+        //    axVLCPlugin21.playlist.add("https://youtu.be/MAYMFwjoWy8");
+        //    //  http cannot be used for live stream. Use RTSP RSP instead.
+        //    //axVLCPlugin21.playlist.add("https://youtu.be/dovudiWfzMU");
+        //    Console.WriteLine("****************************************");
+        //    axVLCPlugin21.playlist.play();
+        //}
 
-        private void axVLCPlugin21_Enter(object sender, EventArgs e)
-        {
+        //private void axVLCPlugin21_Enter(object sender, EventArgs e)
+        //{
 
-        }
+        //}
     }
 }
