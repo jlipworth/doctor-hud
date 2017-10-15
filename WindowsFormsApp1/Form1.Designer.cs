@@ -38,20 +38,17 @@
             this.pCPU = new System.Diagnostics.PerformanceCounter();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.metroProgressBarCPU = new MetroFramework.Controls.MetroProgressBar();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.metroProgressBarRAM = new MetroFramework.Controls.MetroProgressBar();
-            this.labelCPU = new MetroFramework.Controls.MetroLabel();
-            this.labelRAM = new MetroFramework.Controls.MetroLabel();
+            this.spo2ProgressBar = new MetroFramework.Controls.MetroProgressBar();
+            this.heartrateLabel = new MetroFramework.Controls.MetroLabel();
+            this.spo2Label = new MetroFramework.Controls.MetroLabel();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.axVLCPlugin21 = new AxAXVLC.AxVLCPlugin2();
             this.buttonPlay = new MetroFramework.Controls.MetroButton();
-            this.vlcControl1 = new Vlc.DotNet.Forms.VlcControl();
             ((System.ComponentModel.ISupportInitialize)(this.pRAM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pCPU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axVLCPlugin21)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vlcControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // pRAM
@@ -73,54 +70,60 @@
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(554, 113);
+            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel1.Location = new System.Drawing.Point(948, 337);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(38, 19);
+            this.metroLabel1.Size = new System.Drawing.Size(96, 25);
             this.metroLabel1.TabIndex = 0;
-            this.metroLabel1.Text = "CPU:";
-            // 
-            // metroProgressBarCPU
-            // 
-            this.metroProgressBarCPU.Location = new System.Drawing.Point(601, 109);
-            this.metroProgressBarCPU.Name = "metroProgressBarCPU";
-            this.metroProgressBarCPU.Size = new System.Drawing.Size(389, 23);
-            this.metroProgressBarCPU.TabIndex = 1;
+            this.metroLabel1.Text = "Heart_rate:";
             // 
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(554, 165);
+            this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel2.Location = new System.Drawing.Point(948, 253);
+            this.metroLabel2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(41, 19);
+            this.metroLabel2.Size = new System.Drawing.Size(61, 25);
             this.metroLabel2.TabIndex = 2;
-            this.metroLabel2.Text = "RAM:";
+            this.metroLabel2.Text = "SpO2:";
             // 
-            // metroProgressBarRAM
+            // spo2ProgressBar
             // 
-            this.metroProgressBarRAM.Location = new System.Drawing.Point(601, 158);
-            this.metroProgressBarRAM.Name = "metroProgressBarRAM";
-            this.metroProgressBarRAM.Size = new System.Drawing.Size(389, 26);
-            this.metroProgressBarRAM.TabIndex = 3;
-            this.metroProgressBarRAM.Click += new System.EventHandler(this.metroProgressBar2_Click);
+            this.spo2ProgressBar.Location = new System.Drawing.Point(1088, 236);
+            this.spo2ProgressBar.Margin = new System.Windows.Forms.Padding(6);
+            this.spo2ProgressBar.Name = "spo2ProgressBar";
+            this.spo2ProgressBar.Size = new System.Drawing.Size(540, 50);
+            this.spo2ProgressBar.TabIndex = 3;
+            this.spo2ProgressBar.Click += new System.EventHandler(this.metroProgressBar2_Click);
             // 
-            // labelCPU
+            // heartrateLabel
             // 
-            this.labelCPU.AutoSize = true;
-            this.labelCPU.Location = new System.Drawing.Point(1008, 113);
-            this.labelCPU.Name = "labelCPU";
-            this.labelCPU.Size = new System.Drawing.Size(31, 19);
-            this.labelCPU.TabIndex = 4;
-            this.labelCPU.Text = "0 %";
-            this.labelCPU.Click += new System.EventHandler(this.metroLabel3_Click);
+            this.heartrateLabel.AutoSize = true;
+            this.heartrateLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.heartrateLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.heartrateLabel.Location = new System.Drawing.Point(1400, 337);
+            this.heartrateLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.heartrateLabel.Name = "heartrateLabel";
+            this.heartrateLabel.Size = new System.Drawing.Size(22, 25);
+            this.heartrateLabel.TabIndex = 4;
+            this.heartrateLabel.Text = "0";
+            this.heartrateLabel.Click += new System.EventHandler(this.metroLabel3_Click);
             // 
-            // labelRAM
+            // spo2Label
             // 
-            this.labelRAM.AutoSize = true;
-            this.labelRAM.Location = new System.Drawing.Point(1008, 165);
-            this.labelRAM.Name = "labelRAM";
-            this.labelRAM.Size = new System.Drawing.Size(31, 19);
-            this.labelRAM.TabIndex = 5;
-            this.labelRAM.Text = "0 %";
+            this.spo2Label.AutoSize = true;
+            this.spo2Label.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.spo2Label.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.spo2Label.Location = new System.Drawing.Point(1736, 253);
+            this.spo2Label.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.spo2Label.Name = "spo2Label";
+            this.spo2Label.Size = new System.Drawing.Size(42, 25);
+            this.spo2Label.TabIndex = 5;
+            this.spo2Label.Text = "0 %";
             // 
             // chart1
             // 
@@ -128,80 +131,68 @@
             this.chart1.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(554, 206);
+            this.chart1.Location = new System.Drawing.Point(948, 412);
+            this.chart1.Margin = new System.Windows.Forms.Padding(6);
             this.chart1.Name = "chart1";
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series3.Legend = "Legend1";
-            series3.Name = "CPU";
+            series3.Name = "Systolic";
             series4.ChartArea = "ChartArea1";
             series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.IsXValueIndexed = true;
             series4.Legend = "Legend1";
-            series4.Name = "RAM";
+            series4.Name = "Diastolic";
             this.chart1.Series.Add(series3);
             this.chart1.Series.Add(series4);
-            this.chart1.Size = new System.Drawing.Size(523, 154);
+            this.chart1.Size = new System.Drawing.Size(944, 400);
             this.chart1.TabIndex = 6;
             // 
             // axVLCPlugin21
             // 
             this.axVLCPlugin21.Enabled = true;
-            this.axVLCPlugin21.Location = new System.Drawing.Point(12, 99);
-            this.axVLCPlugin21.Margin = new System.Windows.Forms.Padding(2);
+            this.axVLCPlugin21.Location = new System.Drawing.Point(98, 130);
+            this.axVLCPlugin21.Margin = new System.Windows.Forms.Padding(4);
+            this.axVLCPlugin21.MaximumSize = new System.Drawing.Size(600, 450);
             this.axVLCPlugin21.Name = "axVLCPlugin21";
             this.axVLCPlugin21.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axVLCPlugin21.OcxState")));
-            this.axVLCPlugin21.Size = new System.Drawing.Size(521, 292);
+            this.axVLCPlugin21.Size = new System.Drawing.Size(600, 450);
             this.axVLCPlugin21.TabIndex = 9;
+            this.axVLCPlugin21.Enter += new System.EventHandler(this.axVLCPlugin21_Enter);
             // 
             // buttonPlay
             // 
-            this.buttonPlay.Location = new System.Drawing.Point(149, 421);
-            this.buttonPlay.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonPlay.Location = new System.Drawing.Point(264, 750);
+            this.buttonPlay.Margin = new System.Windows.Forms.Padding(4);
             this.buttonPlay.Name = "buttonPlay";
-            this.buttonPlay.Size = new System.Drawing.Size(144, 55);
+            this.buttonPlay.Size = new System.Drawing.Size(288, 106);
             this.buttonPlay.TabIndex = 10;
             this.buttonPlay.Text = "Play";
             this.buttonPlay.UseSelectable = true;
             this.buttonPlay.Click += new System.EventHandler(this.metroButton1_Click);
             // 
-            // vlcControl1
-            // 
-            this.vlcControl1.BackColor = System.Drawing.Color.Black;
-            this.vlcControl1.Location = new System.Drawing.Point(344, 396);
-            this.vlcControl1.Name = "vlcControl1";
-            this.vlcControl1.Size = new System.Drawing.Size(189, 103);
-            this.vlcControl1.Spu = -1;
-            this.vlcControl1.TabIndex = 11;
-            this.vlcControl1.Text = "vlcControl1";
-            this.vlcControl1.VlcLibDirectory = ((System.IO.DirectoryInfo)(resources.GetObject("vlcControl1.VlcLibDirectory")));
-            this.vlcControl1.VlcMediaplayerOptions = null;
-            this.vlcControl1.Click += new System.EventHandler(this.vlcControl1_Click);
-            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1106, 554);
-            this.Controls.Add(this.vlcControl1);
+            this.ClientSize = new System.Drawing.Size(2134, 785);
             this.Controls.Add(this.buttonPlay);
             this.Controls.Add(this.axVLCPlugin21);
             this.Controls.Add(this.chart1);
-            this.Controls.Add(this.labelRAM);
-            this.Controls.Add(this.labelCPU);
-            this.Controls.Add(this.metroProgressBarRAM);
+            this.Controls.Add(this.spo2Label);
+            this.Controls.Add(this.heartrateLabel);
+            this.Controls.Add(this.spo2ProgressBar);
             this.Controls.Add(this.metroLabel2);
-            this.Controls.Add(this.metroProgressBarCPU);
             this.Controls.Add(this.metroLabel1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Padding = new System.Windows.Forms.Padding(10, 60, 10, 10);
+            this.Padding = new System.Windows.Forms.Padding(20, 115, 20, 19);
             this.Text = " Hello ";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pRAM)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pCPU)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axVLCPlugin21)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vlcControl1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,15 +204,13 @@
         private System.Diagnostics.PerformanceCounter pCPU;
         private System.Windows.Forms.Timer timer;
         private MetroFramework.Controls.MetroLabel metroLabel1;
-        private MetroFramework.Controls.MetroProgressBar metroProgressBarCPU;
         private MetroFramework.Controls.MetroLabel metroLabel2;
-        private MetroFramework.Controls.MetroProgressBar metroProgressBarRAM;
-        private MetroFramework.Controls.MetroLabel labelCPU;
-        private MetroFramework.Controls.MetroLabel labelRAM;
+        private MetroFramework.Controls.MetroProgressBar spo2ProgressBar;
+        private MetroFramework.Controls.MetroLabel heartrateLabel;
+        private MetroFramework.Controls.MetroLabel spo2Label;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private AxAXVLC.AxVLCPlugin2 axVLCPlugin21;
         private MetroFramework.Controls.MetroButton buttonPlay;
-        private Vlc.DotNet.Forms.VlcControl vlcControl1;
     }
 }
 

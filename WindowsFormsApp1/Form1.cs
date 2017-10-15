@@ -15,40 +15,32 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : MetroFramework.Forms.MetroForm
     {
-        static string serverIp = "localhost";
-        static int port = 8080;
+        static string serverIp = "10.211.55.2";
+        //static string serverIp = "35.3.37.18";
+        static int port = 56754;
         TcpClient client = new TcpClient(serverIp, port);
+
+        Dictionary<string, int> sensorData = new Dictionary<string, int>();
 
         public Form1()
         {
             InitializeComponent();
+            sensorData.Add("heart_rate", 0);
+            sensorData.Add("systolic", 0);
+            sensorData.Add("diastolic", 0);
+            sensorData.Add("sp_o2", 0);
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            //float fcpu = pCPU.NextValue();
-            //float fram = pRAM.NextValue();
-            //metroProgressBarCPU.Value = (int)fcpu;
-            //metroProgressBarRAM.Value = (int)fram;
-            ////Console.WriteLine(fcpu + "," + fram);
-            //labelCPU.Text = string.Format("{0:0.00}%", fcpu);
-            //labelRAM.Text = string.Format("{0:0.00}%", fram);
-            //chart1.Series["CPU"].Points.AddY(fcpu);
-            //chart1.Series["RAM"].Points.AddY(fram);
 
-            // Send request to server
-            int byteCount = Encoding.ASCII.GetByteCount("ping") + 1;
-            byte[] sendData = new byte[byteCount];
-            // Append a ';' as the delimiter
-            sendData = Encoding.ASCII.GetBytes("ping;");
             NetworkStream stream = client.GetStream();
-            stream.Write(sendData, 0, sendData.Length);
-
             // Get response from server
             StringBuilder msg = new StringBuilder();
-            byte[] receivedData = new byte[100];
+            byte[] receivedData = new byte[1024];
             stream.Read(receivedData, 0, receivedData.Length);
-            List<int> intList = new List<int>();
+
+            string metric = "heart_rate";
             foreach (byte b in receivedData)
             {
                 //Console.WriteLine(b);
@@ -56,8 +48,14 @@ namespace WindowsFormsApp1
                 // Just like what we did in 482 project 4
                 if (b.Equals(59))
                 {
-                    intList.Add(Convert.ToInt32(msg.ToString()));
-                    Console.WriteLine(msg.ToString());
+                    int value = Convert.ToInt32(msg.ToString());
+                    Console.WriteLine(value);
+                    sensorData[metric] = value;
+                    msg.Clear();
+                }
+                else if (b.Equals(58))
+                {
+                    metric = msg.ToString();
                     msg.Clear();
                 }
                 else
@@ -67,14 +65,11 @@ namespace WindowsFormsApp1
             }
 
             // Update the value on UI
-            int cpu = intList[0];
-            int ram = intList[1];
-            metroProgressBarCPU.Value = cpu;
-            metroProgressBarRAM.Value = ram;
-            labelCPU.Text = string.Format("{0}%", cpu);
-            labelRAM.Text = string.Format("{0}%", ram);
-            chart1.Series["CPU"].Points.AddY(cpu);
-            chart1.Series["RAM"].Points.AddY(ram);
+            heartrateLabel.Text = string.Format("{0}", sensorData["heart_rate"]);
+            spo2ProgressBar.Value = sensorData["sp_o2"];
+            spo2Label.Text = string.Format("{0}%", sensorData["sp_o2"]);
+            chart1.Series["Systolic"].Points.AddY(sensorData["systolic"]);
+            chart1.Series["Diastolic"].Points.AddY(sensorData["diastolic"]);
 
         }
 
@@ -103,11 +98,9 @@ namespace WindowsFormsApp1
             axVLCPlugin21.playlist.play();
         }
 
-        // Don't use this vlc.Dotnet button
-        private void vlcControl1_Click(object sender, EventArgs e)
+        private void axVLCPlugin21_Enter(object sender, EventArgs e)
         {
-            vlcControl1.SetMedia("https://youtu.be/MAYMFwjoWy8");
-            vlcControl1.Play();
+
         }
     }
 }
