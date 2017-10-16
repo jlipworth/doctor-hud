@@ -197,6 +197,16 @@ namespace WindowsFormsApp1
 
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void spo2Label_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //// Click this activeX VLC
         //private void metroButton1_Click(object sender, EventArgs e)
         //{
