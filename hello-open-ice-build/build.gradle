@@ -1,0 +1,28 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+
+// builds a gradle wrapper
+// http://www.gradle.org/docs/current/userguide/gradle_wrapper.html
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+mainClassName = "org.mdpnp.helloice.HelloICE"
+
+dependencies {
+    compile 'org.mdpnp:x73-idl-rti-dds:0.6.3' //includes all the openIce components
+    
+    compile 'org.slf4j:slf4j-api:1.7.10'
+    runtime 'org.slf4j:slf4j-log4j12:1.7.10'
+    runtime 'log4j:log4j:1.2.17'
+}
+
+repositories {
+  maven { url 'http://build.openice.info/artifactory/libs-snapshot' }
+  maven { url 'http://build.openice.info/artifactory/libs-release' }
+  mavenCentral()
+}
