@@ -38,21 +38,6 @@ def broadcast_fake_input():
         time.sleep(1)
 
 
-# def broadcast_input():
-#     connect = initialize_socket()
-#     while True:
-#         input_word = input()
-#         if input_word == "metric_id:" and dict.get(input_word, None) is not None:
-#             # this will be the id associated with it
-#             id_str = input()
-#             while True:
-#                 input_word = input()
-#                 # if we need more could insert this into dict
-#                 # seems that every piece of info has this field
-#                 if input_word == "value:":
-#                     connect.send(id_str + " " + input())
-#                     break
-
 def broadcast_input():
     connect = initialize_socket()
     flag = None
@@ -72,10 +57,10 @@ def broadcast_input():
                 print(flag, data[flag])
                 flag = None
                 cnt += 1
-    
+
         metric_str = "heart_rate:" + str(data["heart_rate"]) + ";systolic:" + str(data["systolic"]) + ";diastolic:" + str(data["diastolic"]) + ";sp_o2:" + str(data["sp_o2"]) + ";respiration_rate:" + str(data["respiration_rate"]) + ";etCO2:" + str(data["etCO2"]) + ";"
         print("metric_str:" , metric_str)
-        connect.send(metric_str.encode(encoding='ascii'))        
+        connect.send(metric_str.encode(encoding='ascii'))
 
 def initialize_socket():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -95,6 +80,9 @@ def generate_fake_num():
     diastolic += random.randint(-2, 2)
     sp_o2 += random.randint(-1,1 )
 
+
 if __name__ == "__main__":
-    # broadcast_fake_input()
-    broadcast_input()
+    if sys.argc > 1:
+        broadcast_fake_input()
+    else:
+        broadcast_input()
