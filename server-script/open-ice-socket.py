@@ -82,7 +82,7 @@ def generate_fake_num():
 
 
 if __name__ == "__main__":
-    if sys.argc > 1:
+    if len(sys.argv) > 1:
         broadcast_fake_input()
     else:
         broadcast_input()
