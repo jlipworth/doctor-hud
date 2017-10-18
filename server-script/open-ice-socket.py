@@ -23,8 +23,8 @@ heart_rate = 60
 systolic = 120
 diastolic = 80
 sp_o2 = 96
-etCO2 = 0
-respiration_rate = 0
+etCO2 = 30
+respiration_rate = 17
 random.seed(urandom(64))
 
 
@@ -32,7 +32,7 @@ def broadcast_fake_input():
     connect = initialize_socket()
     while True:
         generate_fake_num()
-        metric_str = "heart_rate:" + str(heart_rate) + ";systolic:" + str(systolic) + ";diastolic:" + str(diastolic) + ";sp_o2:" + str(sp_o2) + ";"
+        metric_str = "heart_rate:" + str(heart_rate) + ";systolic:" + str(systolic) + ";diastolic:" + str(diastolic) + ";sp_o2:" + str(sp_o2) + ";respiration_rate:" + str(respiration_rate) + ";etCO2:" + str(etCO2) + ";"
         print(len(metric_str))
         connect.send(metric_str.encode(encoding='ascii'))
         time.sleep(1)
@@ -67,18 +67,22 @@ def initialize_socket():
     host = socket.gethostname()
     port = 56754
     print("host: " + host + " port: " + str(port))
-    sock.bind(("10.211.55.2", port))
+    sock.bind(("localhost", port))
     sock.listen(5)
     connect, address = sock.accept()
     return connect
 
 
 def generate_fake_num():
-    global heart_rate, systolic, diastolic, sp_o2
+    global heart_rate, systolic, diastolic, sp_o2, etCO2, respiration_rate
     heart_rate += random.randint(-2, 2)
     systolic += random.randint(-2, 2)
     diastolic += random.randint(-2, 2)
-    sp_o2 += random.randint(-1,1 )
+    sp_o2 += random.randint(-1, 1)
+    if sp_o2 > 100:
+        sp_o2 = 100
+    etCO2 += random.randint(-1, 1)
+    respiration_rate += random.randint(-1, 1)
 
 
 if __name__ == "__main__":

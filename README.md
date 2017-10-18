@@ -18,7 +18,6 @@ https://www.openice.info/devdocs/-hello-openice.html.
 ## Run with fake sensor data 
 **Because of the unavailability of the SSL certificate, we built test mode that generates and broadcasts fake sensor data.**
 
-**This is intended for machines that cannot run the precompiled binaries. e.g. testing but only having access to a windows machine. This functionality will be removed when OpenICE updates their certificate for new users to authenticate and download the source.**
-2. Open windows application in Visual Studio, update the ip address variable in Form1.cs line 23 `static string serverIp = "localhost";`to desired server ip in Form1.cs. Update the ip address at line 85 `sock.bind(("10.211.55.2", port))` of open-ice-socket.py to be the server ip. This is the same process as 2 in the real OpenICE data. The desktop application should not need to be changed, but the address at line 85 needs to be the local intranet address of the machine.
-3. Run the script with `python ./server-script/open-ice-socket.py <any arg>`. We have the script on the condition that if an additional argument is passed in, that it will proceed to broadcast fake data. Since OpenICE cannot build, the script will supply the data and send it over the network.
-4. Build and run the windows application. Same instructions as 5 with the real data.
+**This is intended for machines that cannot run the precompiled binaries. e.g. testing but only having access to a windows machine. This functionality will be removed when OpenICE updates their certificate for new users to authenticate and download the source. This can be solely run on a Windows machine. We preconfigured it with localhost so there is no need for additional changes.**
+1. Run the script with `python ./server-script/open-ice-socket.py <any arg>`. We have the script on the condition that if an additional argument is passed in, that it will proceed to broadcast fake data. Since OpenICE cannot build, the script will supply the data and send it over the network.
+2. Build and run the windows application. Same instructions as 5 with the real data.
