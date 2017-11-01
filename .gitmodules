@@ -1,0 +1,6 @@
+[submodule "OpenICE"]
+	path = openice
+	url = https://github.com/mdpnp/mdpnp.git
+[submodule "hello-openice"]
+	path = hello-openice
+	url = https://github.com/mdpnp/hello-openice.git
