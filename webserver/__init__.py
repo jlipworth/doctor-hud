@@ -10,6 +10,8 @@ from flask_sockets import Sockets
 
 
 app = Flask(__name__)
+# Ensure the server picks up new js changes
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 sockets = Sockets(app)
 
 connections_lock = Lock()
