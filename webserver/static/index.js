@@ -112,12 +112,74 @@ function line_chart(dom, input1, input2) {
                 },1000);
 }
 
+function bar(dom, input) {
+    option = {
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            axisLine: {show: false},
+            axisTick: {show: false},
+            splitLine: { show: false },
+            axisLabel: { show: false }
+        },
+        yAxis: {
+            data: ['SpO2'],
+            axisLine: {show: false},
+            axisTick: {show: false},
+            axisLabel: {show: true}
+          },
+        series: [
+            {
+                name: 'SpO2',
+                type: 'bar',
+                stack: 'sum',
+                itemStyle: {
+                    normal: {
+                        color: '#2196f3'
+                    }
+                },
+                label: {
+                    normal: {
+                        formatter:'{c}%',
+                        show: true
+                    }
+                },
+                data: [0]
+            },
+            {
+                type: 'bar',
+                stack: 'sum',
+                itemStyle: {
+                    normal: {
+                        color: '#bcbcbc'
+                    }
+                },
+                data: [100]
+            }
+        ]
+    };
+    var myChart = echarts.init(dom);
+    //(Math.random() * 100).toFixed(1) - 0
+        //metric_dict[input]
+        setInterval(function () {
+                var currentValue = metric_dict[input];
+                option.series[0].data[0] = currentValue;
+                option.series[1].data[0] = 100 - currentValue;
+                myChart.setOption(option, true);
+            },1000);
+}
+
 $(document).ready(function() {
-    var input = ''
-    gauge(document.getElementById('etCO2'), 'etCO2', 'etCO2', 40)
-    gauge(document.getElementById('respiration_rate'), 'respiration_rate', 'respiration rate', 25)
-    gauge(document.getElementById('heart_rate'), 'heart_rate', 'heart rate', 150)
-    line_chart(document.getElementById('line_chart'), 'systolic', 'diastolic')
+    var input = '';
+    bar(document.getElementById('SpO2'), 'sp_o2');
+    gauge(document.getElementById('etCO2'), 'etCO2', 'etCO2', 40);
+    gauge(document.getElementById('respiration_rate'), 'respiration_rate', 'respiration rate', 25);
+    gauge(document.getElementById('heart_rate'), 'heart_rate', 'heart rate', 150);
+    line_chart(document.getElementById('line_chart'), 'systolic', 'diastolic');
 });
 
 
