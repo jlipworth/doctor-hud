@@ -1,30 +1,45 @@
 <html>
   <head>
-    <script type="text/javascript" src="static/jquery-3.2.1.min.js"></script>
+    <script src="static/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <!-- <script type="text/javascript" src="static/jquery.cookie.js"></script> -->
     <!-- <script type="text/javascript" src="static/underscore-min.js"></script> -->
     <script src="static/echarts.js"></script>
     <script src="https://swc.cdn.skype.com/sdk/v1/sdk.min.js"></script>
-    <script type="text/javascript" src="static/index.js"></script>
+    <script src="static/index.js"></script>
+    <link rel="stylesheet" href="/static/css/doctorHUD.css">
   </head>
 
-  <body>
-
-    <p>
+  <body><div class="wideContainer container"><div class="row">
+    <!--<p>
       lkgasdfkjahdlkjfh
     </p>
     
     <p>
       <div id="testo"> testo </div>
-    </p>
-    <div id="SpO2" style="width: 600px;height:150px;"></div>
-    <div id="etCO2" style="width: 600px;height:400px;"></div>
-    <div id="respiration_rate" style="width: 600px;height:400px;"></div>
-    <div id="heart_rate" style="width: 600px;height:400px;"></div>
-    <div id="line_chart" style="width: 600px;height:400px;"></div>
-    <!-- Web control-->    
-    <span class="skype-button bubble " data-contact-id="live:charley-95"></span>
-
+    </p>-->
+    <div class="col-md-8"><div class = "row">
+      <div class="col-md-12">
+        <div id="SpO2" style="max-width:100%; width:400px; height:125px;"></div>
+      </div>
+      <div class="col-md-4">
+        <div id="etCO2" style="max-width:100%; width:400px; height:200px;"></div>
+      </div>
+      <div class="col-md-4">
+        <div id="respiration_rate" style="max-width:100%; width:400px; height:200px;"></div>
+      </div>
+      <div class="col-md-4">
+        <div id="heart_rate" style="max-width:100%; width:400px; height:200px;"></div>
+      </div>
+      <div class="col-md-12">
+        <div id="line_chart" style="width:450px; height:300px;"></div>
+      </div>
+    </div></div>
+    <!-- Web control-->
+    <div class="col-md-4">
+      <span class="skype-button bubble " data-contact-id="live:charley-95"></span>
+    </div>
     <!-- URI Button-->
     <!-- <div id="SkypeButton_Call_live:3a36e7ce1cc19fb1_1">
     <script type="text/javascript" src="https://secure.skypeassets.com/i/scom/js/skype-uri.js"></script>
@@ -37,6 +52,6 @@
      });
      </script>
     </div> -->
-    
-  </body>
+
+  </div></div></body>
 </html>

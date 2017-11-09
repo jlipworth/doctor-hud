@@ -1,5 +1,6 @@
 var obj;
 var metric_dict = {};
+var useRandomData = false;
 
 (function () {
     var data_socket = new WebSocket("ws://" + location.host + "/data");
@@ -19,7 +20,7 @@ var metric_dict = {};
 
 })();
 
-function gauge(dom, input, name, max) {
+function gauge(dom, input, name, max, colorStyle) {
     var option = {
         tooltip : {
             formatter: "{a} <br/>{b} : {c}%"
@@ -32,15 +33,45 @@ function gauge(dom, input, name, max) {
                 width: '100%',
                 height: '100%',
                 detail: {formatter:'{value}'},
-                data: [{value: 0, name: name}]
+                data: [{value: 0, name: name}],
+                title : {
+                    offsetCenter: [0, 70]
+                },
+                pointer : {
+                    width : 4
+                },
+                splitLine: {
+                    show: true,
+                    length: 10,
+                    lineStyle: {
+                        color: 'auto'
+                    }
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        color: colorStyle,
+                        width: 10
+                    }
+                },
+                detail : {
+                     textStyle: {
+                        color: 'auto',
+                        fontSize : 15
+                     }
+                }
             }
         ]
     };
     var myChart = echarts.init(dom);
-    //(Math.random() * 100).toFixed(2) - 0
-    //metric_dict[input]
     setInterval(function () {
-            option.series[0].data[0].value = metric_dict[input];
+            var currentValue;
+            if (!useRandomData) {
+                currentValue = metric_dict[input]
+            } else {
+                currentValue = (Math.random() * 100).toFixed(2) - 0
+            }
+            option.series[0].data[0].value = currentValue;
             myChart.setOption(option, true);
         },1000);
 }
@@ -95,6 +126,14 @@ function line_chart(dom, input1, input2) {
         var myChart = echarts.init(dom);
         var count = 0
         setInterval(function () {
+                    var currentValue1, currentValue2;
+                    if (!useRandomData) {
+                        currentValue1 = metric_dict[input1]
+                        currentValue2 = metric_dict[input2]
+                    } else {
+                        currentValue1 = (Math.random() * 100).toFixed(2) - 0
+                        currentValue2 = (Math.random() * 100).toFixed(2) - 0
+                    }
                     count++;
                     if(count > 10) {
                         option.xAxis.data.shift();
@@ -104,10 +143,8 @@ function line_chart(dom, input1, input2) {
                     var d = new Date();
                     var currentTime = d.getHours() + ':'+ d.getMinutes() + ':'+ d.getSeconds();
                     option.xAxis.data.push(currentTime);
-                    //(Math.random() * 100).toFixed(2) - 0
-                    //metric_dict[input]
-                    option.series[0].data.push(metric_dict[input1]);
-                    option.series[1].data.push(metric_dict[input2]);
+                    option.series[0].data.push(currentValue1);
+                    option.series[1].data.push(currentValue2);
                     myChart.setOption(option, true);
                 },1000);
 }
@@ -163,10 +200,13 @@ function bar(dom, input) {
         ]
     };
     var myChart = echarts.init(dom);
-    //(Math.random() * 100).toFixed(1) - 0
-        //metric_dict[input]
         setInterval(function () {
-                var currentValue = metric_dict[input];
+                var currentValue;
+                if (!useRandomData) {
+                    currentValue = metric_dict[input]
+                } else {
+                    currentValue = (Math.random() * 100).toFixed(1) - 0
+                }
                 option.series[0].data[0] = currentValue;
                 option.series[1].data[0] = 100 - currentValue;
                 myChart.setOption(option, true);
@@ -176,9 +216,9 @@ function bar(dom, input) {
 $(document).ready(function() {
     var input = '';
     bar(document.getElementById('SpO2'), 'sp_o2');
-    gauge(document.getElementById('etCO2'), 'etCO2', 'etCO2', 40);
-    gauge(document.getElementById('respiration_rate'), 'respiration_rate', 'respiration rate', 25);
-    gauge(document.getElementById('heart_rate'), 'heart_rate', 'heart rate', 150);
+    gauge(document.getElementById('etCO2'), 'etCO2', 'etCO2', 60, [[0.5833, '#9b9b9b'],[0.75, '#ffcc00'],[1, '#9b9b9b']]);
+    gauge(document.getElementById('respiration_rate'), 'respiration_rate', 'respiration rate', 25, [[0.4, '#9b9b9b'],[0.8, '#ffcc00'],[1, '#9b9b9b']]);
+    gauge(document.getElementById('heart_rate'), 'heart_rate', 'heart rate', 150, [[0.33, '#9b9b9b'],[0.66, '#ffcc00'],[1, '#ff4500']]);
     line_chart(document.getElementById('line_chart'), 'systolic', 'diastolic');
 });
 
