@@ -221,5 +221,3 @@ $(document).ready(function() {
     gauge(document.getElementById('heart_rate'), 'heart_rate', 'heart rate', 150, [[0.33, '#9b9b9b'],[0.66, '#ffcc00'],[1, '#ff4500']]);
     line_chart(document.getElementById('line_chart'), 'systolic', 'diastolic');
 });
-
-
