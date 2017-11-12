@@ -22,7 +22,7 @@ sockets = Sockets(app)
 connections_lock = Lock()
 connections = {}
 openice_proc_started = False
-
+wrongPassword = False
 
 def enqueue_to_sockets(data):
     data_str = json.dumps(data)
@@ -121,38 +121,72 @@ def _is_password_match(user_input_password, database_stored_password):
     user_input_password_salted_hash = hash_obj.hexdigest()
     return user_input_password_salted_hash == correct_password_salted_hash
 
+@app.teardown_appcontext
+def close_db(error):
+    # pylint: disable=unused-argument
+    """Close the database at the end of a request."""
+    if hasattr(flask.g, 'sqlite_db'):
+        flask.g.sqlite_db.commit()
+        flask.g.sqlite_db.close()
+
+Thread(target=openice_proc).start()
+
+# Return True when the user types the correct username and password
+def _is_password_match(user_input_password, database_stored_password):
+    # Split the password stored in the database to three parts
+    password_anatomy = database_stored_password.split('$')
+    algorithm = password_anatomy[0]
+    salt = password_anatomy[1]
+    correct_password_salted_hash = password_anatomy[2]
+    # Check whether the passwords match
+    hash_obj = hashlib.new(algorithm)
+    user_input_password_salted = salt + user_input_password
+    hash_obj.update(user_input_password_salted.encode('utf-8'))
+    user_input_password_salted_hash = hash_obj.hexdigest()
+    return user_input_password_salted_hash == correct_password_salted_hash
+
 @app.route("/", methods=['GET'])
 def page_index():
-    if True:
+    if 'logged_in_user' not in session:
         return redirect(url_for('login'))
-    return render_template(url_for('index'))
+    return render_template('index.html')
 
 @app.route("/connect", methods=['GET', 'POST'])
 def connect():
+    if 'logged_in_user' not in session:
+        return redirect(url_for('login'))
     return render_template('connect.html')
-    
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+    global wrongPassword
     if request.method == 'POST':
         database = get_db()
         cur = database.execute('select password from users where username=?',
                                (request.form['username'],))
         database_query_result = cur.fetchone()
         if database_query_result is None:
-            abort(403)
+            wrongPassword = True
+            return redirect(url_for('login'))
         # Check the password
         db_stored_password = database_query_result.get('password')
         if db_stored_password and _is_password_match(request.form['password'], db_stored_password):
+            wrongPassword = False
             session['logged_in_user'] = request.form['username']
             return redirect(url_for('connect'))
         else:
-            abort(403)
-    return render_template('login.html')
+            wrongPassword = True
+            return redirect(url_for('login'))
+    loginOptions = {
+        "wrongPassword": wrongPassword
+    }
+    return render_template('login.html', **loginOptions)
 
 @app.route("/index", methods=['GET', 'POST'])
 def index():
+    if 'logged_in_user' not in session:
+        return redirect(url_for('login'))
     return render_template('index.html')
-
 
 
 @sockets.route('/data')

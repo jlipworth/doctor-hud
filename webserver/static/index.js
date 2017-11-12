@@ -1,6 +1,6 @@
 var obj;
 var metric_dict = {};
-var useRandomData = false;
+var useRandomData = true;
 
 (function () {
     var data_socket = new WebSocket("ws://" + location.host + "/data");
