@@ -1,6 +1,6 @@
 var obj;
 var metric_dict = {};
-var useRandomData = true;
+var useRandomData = false;
 
 (function () {
     var data_socket = new WebSocket("ws://" + location.host + "/data");
@@ -11,11 +11,11 @@ var useRandomData = true;
         for (var metric in obj) {
             metric_dict[metric] = obj[metric];
         }
-        document.getElementById("testo").innerHTML = "";
-        for (var metric in metric_dict) {
-            document.getElementById("testo").innerHTML += metric + ": " +
-            metric_dict[metric] + "<br>";
-        }
+        // document.getElementById("testo").innerHTML = "";
+        // for (var metric in metric_dict) {
+        //     document.getElementById("testo").innerHTML += metric + ": " +
+        //     metric_dict[metric] + "<br>";
+        // }
     };
 
 })();

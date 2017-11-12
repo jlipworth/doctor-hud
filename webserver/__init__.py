@@ -69,6 +69,7 @@ def openice_proc():
 
     print("openice_proc end")
 
+Thread(target=openice_proc).start()
 
 DATABASE_FILENAME = os.path.join(
     os.path.dirname(os.path.dirname(os.path.realpath(__file__))),
@@ -104,32 +105,7 @@ def close_db(error):
     if hasattr(flask.g, 'sqlite_db'):
         flask.g.sqlite_db.commit()
         flask.g.sqlite_db.close()
-
-Thread(target=openice_proc).start()
-
-# Return True when the user types the correct username and password
-def _is_password_match(user_input_password, database_stored_password):
-    # Split the password stored in the database to three parts
-    password_anatomy = database_stored_password.split('$')
-    algorithm = password_anatomy[0]
-    salt = password_anatomy[1]
-    correct_password_salted_hash = password_anatomy[2]
-    # Check whether the passwords match
-    hash_obj = hashlib.new(algorithm)
-    user_input_password_salted = salt + user_input_password
-    hash_obj.update(user_input_password_salted.encode('utf-8'))
-    user_input_password_salted_hash = hash_obj.hexdigest()
-    return user_input_password_salted_hash == correct_password_salted_hash
-
-@app.teardown_appcontext
-def close_db(error):
-    # pylint: disable=unused-argument
-    """Close the database at the end of a request."""
-    if hasattr(flask.g, 'sqlite_db'):
-        flask.g.sqlite_db.commit()
-        flask.g.sqlite_db.close()
-
-Thread(target=openice_proc).start()
+        
 
 # Return True when the user types the correct username and password
 def _is_password_match(user_input_password, database_stored_password):
@@ -159,6 +135,7 @@ def connect():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+    print('login start')
     global wrongPassword
     if request.method == 'POST':
         database = get_db()
