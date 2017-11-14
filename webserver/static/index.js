@@ -11,11 +11,11 @@ var useRandomData = false;
         for (var metric in obj) {
             metric_dict[metric] = obj[metric];
         }
-        document.getElementById("testo").innerHTML = "";
-        for (var metric in metric_dict) {
-            document.getElementById("testo").innerHTML += metric + ": " +
-            metric_dict[metric] + "<br>";
-        }
+        // document.getElementById("testo").innerHTML = "";
+        // for (var metric in metric_dict) {
+        //     document.getElementById("testo").innerHTML += metric + ": " +
+        //     metric_dict[metric] + "<br>";
+        // }
     };
 
 })();
@@ -221,5 +221,3 @@ $(document).ready(function() {
     gauge(document.getElementById('heart_rate'), 'heart_rate', 'heart rate', 150, [[0.33, '#9b9b9b'],[0.66, '#ffcc00'],[1, '#ff4500']]);
     line_chart(document.getElementById('line_chart'), 'systolic', 'diastolic');
 });
-
-

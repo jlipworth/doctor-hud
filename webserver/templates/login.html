@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="static/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="static/login.js"></script>
+</head>
+<body>
+
+<div class="main">
+    {% if wrongPassword %}
+    <div class="alert alert-danger alert-dismissable" id="login-alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Password or username is not correct.
+    </div>
+    {% endif %}
+    <div class="container">
+        <center>
+            <div class="middle">
+                <div id="login">
+                    <form action='' method='post' enctype='multipart/form-data'>
+                        <fieldset class="clearfix">
+                            <p ><span class="fa fa-user"></span><input type="text" name='username' id="inputUsername" class="form-control" placeholder="username" required autofocus></p>
+                            <p><span class="fa fa-lock"></span><input type="password" name='password' id="inputPassword" class="form-control" placeholder="password" required></p>
+
+                            <div>
+                                <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#">Sign up</a></span>
+                                <span style="width:50%; text-align:right;  display: inline-block;"><input type='submit' value='Sign in'/></span>
+                            </div>
+
+                        </fieldset>
+                        <div class="clearfix"></div>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="logo">LOGO
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </center>
+    </div>
+</div>
+</body>
+</html>
