@@ -91,7 +91,7 @@ def data_socket(ws):
 
 
 
-openice_proc()
+#openice_proc()
 
 
 if __name__ == "__main__":
