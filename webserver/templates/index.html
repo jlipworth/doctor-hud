@@ -2,6 +2,9 @@
   <head>
     <script src="static/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <!-- <script type="text/javascript" src="static/jquery.cookie.js"></script> -->
     <!-- <script type="text/javascript" src="static/underscore-min.js"></script> -->
@@ -19,21 +22,76 @@
     <p>
       <div id="testo"> testo </div>
     </p>-->
+
     <div class="col-md-8"><div class = "row">
       <div class="col-md-12">
-        <div id="SpO2" style="max-width:100%; width:400px; height:125px;"></div>
+        <div class="card" style="width:400px">
+          <div class="card-header" role="tab" id="headingOne">
+            <h5 class="mb-0">
+              <a class="nav-toggle" data-toggle="collapse" data-parent="#accordion" href="#" onClick = "onClick('#collapseOne', this, 'SpO2')" aria-expanded="true" aria-controls="collapseOne">
+                Hide
+              </a>
+            </h5>
+          </div>
+          <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+              <div class="card-block" id="SpO2" style="max-width:100%; width:400px; height:125px;"></div>
+          </div>
+        </div>
+      <div class="col-md-4">
+        <div class="card" style="width:400px">
+          <div class="card-header" role="tab" id="headingTwo">
+            <h5 class="mb-0">
+              <a class="nav-toggle" data-toggle="collapse" data-parent="#accordion" href="#" onClick = "onClick('#collapseTwo', this, 'etCO2')" aria-expanded="true" aria-controls="collapseTwo">
+                Hide
+              </a>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="card-block" id="etCO2" style="max-width:100%; width:400px; height:200px;"></div>
+          </div>
+        </div>
       </div>
       <div class="col-md-4">
-        <div id="etCO2" style="max-width:100%; width:400px; height:200px;"></div>
+        <div class="card" style="width:400px">
+          <div class="card-header" role="tab" id="headingThree">
+            <h5 class="mb-0">
+              <a class="nav-toggle" data-toggle="collapse" data-parent="#accordion" href="#" onClick = "onClick('#collapseThree', this, 'respiration rate')" aria-expanded="true" aria-controls="collapseThree">
+                Hide
+              </a>
+            </h5>
+          </div>
+          <div id="collapseThree" class="collapse show" role="tabpanel" aria-labelledby="headingThree">
+            <div class="card-block" id="respiration_rate" style="max-width:100%; width:400px; height:200px;"></div>
+          </div>
+        </div>
       </div>
       <div class="col-md-4">
-        <div id="respiration_rate" style="max-width:100%; width:400px; height:200px;"></div>
-      </div>
-      <div class="col-md-4">
-        <div id="heart_rate" style="max-width:100%; width:400px; height:200px;"></div>
+        <div class="card" style="width:400px">
+          <div class="card-header" role="tab" id="headingFour">
+            <h5 class="mb-0">
+              <a class="nav-toggle" data-toggle="collapse" data-parent="#accordion" href="#" onClick = "onClick('#collapseFour', this, 'heart rate')" aria-expanded="true" aria-controls="collapseFour">
+                Hide
+              </a>
+            </h5>
+          </div>
+          <div id="collapseFour" class="collapse show" role="tabpanel" aria-labelledby="headingFour">
+            <div class="card-block" id="heart_rate" style="max-width:100%; width:400px; height:200px;"></div>
+          </div>
+        </div>
       </div>
       <div class="col-md-12">
-        <div id="line_chart" style="width:450px; height:300px;"></div>
+        <div class="card" style="width:450px">
+          <div class="card-header" role="tab" id="headingFive">
+            <h5 class="mb-0">
+              <a class="nav-toggle" data-toggle="collapse" data-parent="#accordion" href="#" onClick = "onClick('#collapseFive', this, 'systolic and diastolic')" aria-expanded="true" aria-controls="collapseFive">
+                Hide
+              </a>
+            </h5>
+          </div>
+          <div id="collapseFive" class="collapse show" role="tabpanel" aria-labelledby="headingFive">
+            <div class="card-block" id="line_chart" style="width:450px; height:300px;"></div>
+          </div>
+        </div>
       </div>
     </div></div>
     <!-- Web control-->

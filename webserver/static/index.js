@@ -213,6 +213,20 @@ function bar(dom, input) {
             },1000);
 }
 
+function onClick (href, toggle_switch, type) {
+    var collapse_content_selector = href
+    //make the collapse content to be shown or hide
+    $(collapse_content_selector).toggle(function(){
+        if($(this).css('display')=='none'){
+        //change the button label to be 'Show' + type
+        toggle_switch.innerHTML = 'Show ' + type;
+        }else{
+        //change the button label to be 'Hide'
+        toggle_switch.innerHTML = 'Hide';
+        }
+    });
+}
+
 $(document).ready(function() {
     var input = '';
     bar(document.getElementById('SpO2'), 'sp_o2');
