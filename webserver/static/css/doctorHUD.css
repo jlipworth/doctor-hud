@@ -13,3 +13,7 @@
 .titleButton {
     margin-left: 5
 }
+
+.hiddenForm {
+    display: none
+}

@@ -17,16 +17,19 @@
 
   <body>
     <script src="static/dragula.js"></script>
+    
+    <form class="hiddenForm" action="/logout" method="post" id="logout-form"></form>
 
     <nav class="navbar navbar-expand-md bg-dark navbar-dark sensorCard">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">DoctorHUD</a>
+        <!-- <a class="navbar-brand" href="#">DoctorHUD</a> -->
+        DoctorHUD
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="nav navbar-nav navbar-right">
           <button class="btn btn-default navbar-btn titleButton">Help</button>
-          <button class="btn btn-default navbar-btn titleButton">Log out</button>
+          <button class="btn btn-default navbar-btn titleButton" form="logout-form" type="submit">Log out</button>
         </ul>
       </div>
     </nav>

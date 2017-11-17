@@ -3,12 +3,13 @@ import string
 import sqlite3
 import os
 import flask
+from datetime import datetime, timedelta
 from subprocess import Popen, PIPE
 from threading import Lock, Thread
 from queue import Queue
 
 import scrypt
-from flask import Flask, render_template, redirect, request, session
+from flask import Flask, render_template, redirect, request, session, Response
 from flask_sockets import Sockets
 
 
@@ -124,17 +125,17 @@ def close_db(error):
 @app.route("/", methods=['GET'])
 def index():
     if 'logged_in_username' not in session:
-        return render_template('login.html', wrongPassword=False)
+        return redirect('/login')
     return render_template('index.html')
 
 
 @app.route("/login", methods=['GET'])
-def login_redirect():
-    return redirect('/')
+def login_page():
+    return render_template('login.html', wrongPassword=False)
 
 
 @app.route("/login", methods=['POST'])
-def login():
+def login_form():
     db = get_db()
     cur = db.execute('SELECT * FROM users WHERE username=?',
                      (request.form['username'],))
@@ -148,23 +149,87 @@ def login():
 
         if true_hash == input_hash:
             session['logged_in_username'] = request.form['username']
+            session['admin_logged_in'] = database_query_result['is_admin']
             return redirect('/')
 
     return render_template('login.html', wrongPassword=True)
 
 
-@app.route("/asdf", methods=['GET'])
-def asdf():
-    salt = os.urandom(16)
-    password_hash = scrypt.hash("password", salt)
+@app.route("/logout", methods=['POST'])
+def logout():
+    if 'logged_in_username' in session:
+        del session['logged_in_username']
+    return redirect('/login')
 
+
+@app.route("/create_account", methods=['GET'])
+def create_account_page():
+    return render_template("create_account.html")
+
+
+@app.route("/create_account", methods=['POST'])
+def create_account():
     db = get_db()
+    cur = db.execute('SELECT * FROM users WHERE username=?',
+                     (request.form['username'],))
+    database_query_result = cur.fetchone()
+    if database_query_result is not None:
+        # TODO "username taken" error
+        return redirect('/create_account')
+
+    salt = os.urandom(16)
+    password_hash = scrypt.hash(request.form['password'], salt)
+
     db.execute('INSERT INTO users (username, password_hash, password_salt) '
-               'VALUES ("admin", ?, ?)', (password_hash, salt))
+               'VALUES (?, ?, ?)',
+               (request.form['username'], password_hash, salt))
 
     db.commit()
 
-    return redirect('/')
+    # TODO "account successfully created"
+    return redirect('/login')
+
+
+@app.route("/admin/generate_token", methods=['POST'])
+def generate_token():
+    tok = ''.join(str(ord(os.urandom(1)) % 10) for _ in range(12))
+    # TODO custom expire time?
+    expires = datetime.now() + timedelta(minutes=5)
+
+    db = get_db()
+    db.execute('INSERT INTO tokens (token, time_expires) VALUES (?, ?)',
+               (tok, expires))
+
+    db.commit()
+
+    return ('', 204)
+
+
+@app.route("/admin/get_tokens", methods=['GET'])
+def get_tokens():
+    db = get_db()
+
+    db.execute('DELETE FROM tokens WHERE time_expires < ?', (datetime.now(),))
+    db.commit()
+
+    cur = db.execute('SELECT * FROM tokens')
+
+    token_list = sorted(
+        ((row['token'], row['time_expires'], row['time_created'])
+         for row in cur.fetchall()),
+        key=lambda t: t[1]
+    )
+
+    r = json.dumps(token_list)
+    return Response(response=r, status=200, mimetype="application/json")
+
+
+@app.route("/admin", methods=['GET'])
+def admin():
+    if 'admin_logged_in' not in session:
+        return redirect('/login')
+
+    return render_template('admin.html')
 
 
 @sockets.route('/data')
@@ -193,6 +258,19 @@ CREATE TABLE IF NOT EXISTS users (
     username TEXT NOT NULL PRIMARY KEY,
     password_hash BLOB NOT NULL,
     password_salt BLOB NOT NULL,
+    is_admin INTEGER NOT NULL DEFAULT 0,
+    time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)''')
+#     db.cursor().execute('''
+# CREATE TABLE IF NOT EXISTS admin_password (
+#     password_hash BLOB NOT NULL,
+#     password_salt BLOB NOT NULL,
+#     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+# )''')
+    db.cursor().execute('''
+CREATE TABLE IF NOT EXISTS tokens (
+    token TEXT NOT NULL,
+    time_expires TIMESTAMP,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )''')
     db.commit()
