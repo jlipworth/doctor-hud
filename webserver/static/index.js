@@ -213,8 +213,23 @@ function bar(dom, input) {
             },1000);
 }
 
+function onClick (href, toggle_switch, type) {
+    var collapse_content_selector = href
+    //make the collapse content to be shown or hide
+    $(collapse_content_selector).toggle(function(){
+        if($(this).css('display')=='none'){
+        //change the button label to be 'Show' + type
+        toggle_switch.innerHTML = 'Show ' + type;
+        }else{
+        //change the button label to be 'Hide'
+        toggle_switch.innerHTML = 'Hide';
+        }
+    });
+}
+
 $(document).ready(function() {
     var input = '';
+    var drake = dragula([document.getElementById('sensor1'), document.getElementById('sensor2')])
     bar(document.getElementById('SpO2'), 'sp_o2');
     gauge(document.getElementById('etCO2'), 'etCO2', 'etCO2', 60, [[0.5833, '#9b9b9b'],[0.75, '#ffcc00'],[1, '#9b9b9b']]);
     gauge(document.getElementById('respiration_rate'), 'respiration_rate', 'respiration rate', 25, [[0.4, '#9b9b9b'],[0.8, '#ffcc00'],[1, '#9b9b9b']]);
