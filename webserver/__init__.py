@@ -103,8 +103,8 @@ def close_db(error):
     # pylint: disable=unused-argument
     """Close the database at the end of a request."""
     if hasattr(flask.g, 'sqlite_db'):
-        flask.g.sqlite_db.commit()
-        # flask.g.sqlite_db.close()
+        # flask.g.sqlite_db.commit()
+        flask.g.sqlite_db.close()
 
 
 # # Return True when the user types the correct username and password
@@ -152,6 +152,24 @@ def login_form():
             session['admin_logged_in'] = database_query_result['is_admin']
             return redirect('/')
 
+    return render_template('login.html', wrongPassword=True)
+
+
+@app.route("/login_token", methods=['POST'])
+def login_token():
+    db = get_db()
+
+    db.execute('DELETE FROM tokens WHERE time_expires < ?', (datetime.now(),))
+    db.commit()
+
+    cur = db.execute('SELECT * FROM tokens WHERE token=?',
+                     (request.form['token'],))
+
+    if cur.fetchone() is not None:
+        session['logged_in_username'] = "Guest"
+        return redirect('/')
+
+    # TODO "invalid token" message
     return render_template('login.html', wrongPassword=True)
 
 
