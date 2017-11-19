@@ -137,8 +137,10 @@ def index():
        datetime.strptime(row['access_begins'], "%Y-%m-%d %H:%M:%S") > now or \
        datetime.strptime(row['access_ends'], "%Y-%m-%d %H:%M:%S") < now:
         return render_template('no_access.html')
-
-    return render_template('index.html')
+    if  session.get("admin_logged_in", True):
+        return render_template('index.html', admin=True)
+    else:
+        return render_template('index.html', admin=False)
 
 
 @app.route("/login", methods=['GET'])
