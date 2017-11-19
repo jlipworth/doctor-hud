@@ -1,20 +1,22 @@
 
-
-var t = document.getElementById('address');
-var sd = document.getElementById('server-dropdown');
-
-sd.value = '';
-t.value = '';
-
-sd.onchange = function() {
-    if (sd.value !== '') {
-        t.value = sd.value;
-    }
-};
-
-
+var t, sd;
 
 function submit_connect() {
-    // TODO https
-    window.location = "http://" + t.value;
+    window.location = t.value;
 };
+
+$(document).ready(function() {
+    t = document.getElementById('address');
+    sd = document.getElementById('server-dropdown');
+
+    sd.value = '';
+    t.value = '';
+
+    sd.onchange = function() {
+        if (sd.value !== '') {
+            t.value = sd.value;
+        }
+    };
+
+
+});
