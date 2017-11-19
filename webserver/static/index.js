@@ -15,7 +15,7 @@ function gauge(dom, input, name, max, colorStyle) {
                 width: '100%',
                 height: '100%',
                 detail: {formatter:'{value}'},
-                data: [{value: 0, name: name}],
+                data: [{value: 0}],
                 title : {
                     offsetCenter: [0, 70]
                 },
@@ -39,7 +39,7 @@ function gauge(dom, input, name, max, colorStyle) {
                 detail : {
                      textStyle: {
                         color: 'auto',
-                        fontSize : 15
+                        fontSize : 32
                      }
                 }
             }
@@ -77,7 +77,7 @@ function line_chart(dom, input1, input2) {
             xAxis: {
                 type : 'category',
                 boundaryGap : false,
-                data : [0]
+                data : []
             },
             yAxis: {
                 type: 'value',
@@ -90,19 +90,22 @@ function line_chart(dom, input1, input2) {
             {
                 name: 'Systolic',
                 type: 'line',
-                label:{ normal:{show:true} },
+                label:{ normal:{show:true, fontSize: 18, position: [5, -20]} },
                 showSymbol: true,
-                hoverAnimation: false,
-                data: [0]
+                animation: false,
+                hoverAnimation: true,
+                data: [],
             },
             {
                 name: 'Diastolic',
                 type: 'line',
-                label:{ normal:{show:true} },
+                label:{ normal:{show:true, fontSize: 18, position: [5, 10] } },
                 showSymbol: true,
-                hoverAnimation: false,
-                data: [0]
+                animation: false,
+                hoverAnimation: true,
+                data: [],
             }
+            
             ]
         };
         var myChart = echarts.init(dom);
@@ -117,7 +120,7 @@ function line_chart(dom, input1, input2) {
                         currentValue2 = (Math.random() * 100).toFixed(2) - 0
                     }
                     count++;
-                    if(count > 10) {
+                    if(count > 11) {
                         option.xAxis.data.shift();
                         option.series[0].data.shift();
                         option.series[1].data.shift();
@@ -164,7 +167,8 @@ function bar(dom, input) {
                 label: {
                     normal: {
                         formatter:'{c}%',
-                        show: true
+                        show: true,
+                        fontSize: 26
                     }
                 },
                 data: [0]
@@ -204,7 +208,7 @@ function onClick (href, toggle_switch, type) {
         toggle_switch.innerHTML = 'Show ' + type;
         }else{
         //change the button label to be 'Hide'
-        toggle_switch.innerHTML = 'Hide';
+        toggle_switch.innerHTML = 'Hide ' + type;
         }
     });
 }
