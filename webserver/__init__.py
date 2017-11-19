@@ -11,6 +11,7 @@ from queue import Queue
 import scrypt
 from flask import Flask, render_template, redirect, request, session, Response
 from flask_sockets import Sockets
+from geventwebsocket.exceptions import WebSocketError
 
 
 DATABASE_FILENAME = os.path.join(
@@ -126,6 +127,17 @@ def close_db(error):
 def index():
     if 'logged_in_username' not in session:
         return redirect('/login')
+
+    now = datetime.utcnow()
+    db = get_db()
+    cur = db.execute('SELECT * FROM user_access WHERE username=?',
+                     (session['logged_in_username'],))
+    row = cur.fetchone()
+    if row is None or \
+       datetime.strptime(row['access_begins'], "%Y-%m-%d %H:%M:%S") > now or \
+       datetime.strptime(row['access_ends'], "%Y-%m-%d %H:%M:%S") < now:
+        return render_template('no_access.html')
+
     return render_template('index.html')
 
 
@@ -159,7 +171,8 @@ def login_form():
 def login_token():
     db = get_db()
 
-    db.execute('DELETE FROM tokens WHERE time_expires < ?', (datetime.now(),))
+    db.execute('DELETE FROM tokens WHERE time_expires < ?',
+               (datetime.utcnow(),))
     db.commit()
 
     cur = db.execute('SELECT * FROM tokens WHERE token=?',
@@ -173,10 +186,10 @@ def login_token():
     return render_template('login.html', wrongPassword=True)
 
 
-@app.route("/logout", methods=['POST'])
+# TODO probably don't support get here
+@app.route("/logout", methods=['GET', 'POST'])
 def logout():
-    if 'logged_in_username' in session:
-        del session['logged_in_username']
+    session.clear()
     return redirect('/login')
 
 
@@ -198,21 +211,33 @@ def create_account():
     salt = os.urandom(16)
     password_hash = scrypt.hash(request.form['password'], salt)
 
-    db.execute('INSERT INTO users (username, password_hash, password_salt) '
-               'VALUES (?, ?, ?)',
-               (request.form['username'], password_hash, salt))
+    db.execute('INSERT INTO users (username, password_hash, password_salt, is_admin)'
+               'VALUES (?, ?, ?, ?)',
+               (request.form['username'], password_hash, salt, 0))
 
     db.commit()
 
     # TODO "account successfully created"
-    return redirect('/login')
+    return redirect('/')
+
+
+@app.route("/admin", methods=['GET'])
+def admin():
+    if not session.get("admin_logged_in", False):
+        return redirect('/')
+
+    db = get_db()
+    cur = db.execute('SELECT username FROM users')
+    usernames = [u["username"] for u in cur.fetchall()]
+
+    return render_template('admin.html', usernames=usernames)
 
 
 @app.route("/admin/generate_token", methods=['POST'])
 def generate_token():
     tok = ''.join(str(ord(os.urandom(1)) % 10) for _ in range(12))
     # TODO custom expire time?
-    expires = datetime.now() + timedelta(minutes=5)
+    expires = datetime.utcnow() + timedelta(minutes=5)
 
     db = get_db()
     db.execute('INSERT INTO tokens (token, time_expires) VALUES (?, ?)',
@@ -227,7 +252,8 @@ def generate_token():
 def get_tokens():
     db = get_db()
 
-    db.execute('DELETE FROM tokens WHERE time_expires < ?', (datetime.now(),))
+    db.execute('DELETE FROM tokens WHERE time_expires < ?',
+               (datetime.utcnow(),))
     db.commit()
 
     cur = db.execute('SELECT * FROM tokens')
@@ -242,12 +268,42 @@ def get_tokens():
     return Response(response=r, status=200, mimetype="application/json")
 
 
-@app.route("/admin", methods=['GET'])
-def admin():
-    if 'admin_logged_in' not in session:
-        return redirect('/login')
+@app.route("/admin/give_access", methods=['POST'])
+def give_access():
+    db = get_db()
+    db.execute('INSERT INTO user_access (username, access_begins, access_ends)'
+               ' VALUES (?, ?, ?)',
+               (
+                   request.form['username'],
+                   datetime.strptime(request.form['access_begins'],
+                                     "%Y-%m-%dT%H:%M"),
+                   datetime.strptime(request.form['access_ends'],
+                                     "%Y-%m-%dT%H:%M"),
+               ))
 
-    return render_template('admin.html')
+    db.commit()
+
+    return ('', 204)
+
+
+@app.route("/admin/get_accesses", methods=['GET'])
+def get_accesses():
+    db = get_db()
+
+    db.execute('DELETE FROM user_access WHERE access_ends < ?',
+               (datetime.utcnow(),))
+    db.commit()
+
+    cur = db.execute('SELECT * FROM user_access')
+
+    access_list = sorted(
+        ((row['username'], row['access_begins'], row['access_ends'])
+         for row in cur.fetchall()),
+        key=lambda t: t[1]
+    )
+
+    r = json.dumps(access_list)
+    return Response(response=r, status=200, mimetype="application/json")
 
 
 @sockets.route('/data')
@@ -259,8 +315,10 @@ def data_socket(ws):
     try:
         while not ws.closed:
             s = q.get()
-
             ws.send(s)
+
+    except WebSocketError as e:
+        print("websocket error:", e)
 
     finally:
         with connections_lock:
@@ -286,11 +344,47 @@ CREATE TABLE IF NOT EXISTS users (
 #     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 # )''')
     db.cursor().execute('''
+CREATE TABLE IF NOT EXISTS user_access (
+    username TEXT NOT NULL,
+    access_begins TIMESTAMP NOT NULL,
+    access_ends TIMESTAMP NOT NULL
+)''')
+    db.cursor().execute('''
 CREATE TABLE IF NOT EXISTS tokens (
-    token TEXT NOT NULL,
-    time_expires TIMESTAMP,
+    token TEXT NOT NULL PRIMARY KEY,
+    time_expires TIMESTAMP NOT NULL,
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )''')
+
+    # TODO do this in server installation
+    db.execute('''
+REPLACE INTO users (username, password_hash, password_salt, is_admin)
+    VALUES (?, ?, ?, ?)''',
+               ("admin", scrypt.hash(b"password", b"\0"), b"\0", 1))
+
+    # "Guest" account for token login, can't actually log in directly
+    db.execute('''
+REPLACE INTO users (username, password_hash, password_salt, is_admin)
+    VALUES (?, ?, ?, ?)''',
+               ("Guest", os.urandom(128), b"\0", 0))
+
+    db.execute('''
+REPLACE INTO user_access (username, access_begins, access_ends)
+    VALUES (?, ?, ?)''',
+               ("admin", datetime.min, datetime.max.replace(microsecond=0)))
+
+    # TODO unneccesary?
+    db.execute('''
+REPLACE INTO user_access (username, access_begins, access_ends)
+    VALUES (?, ?, ?)''',
+               ("Guest", datetime.min, datetime.max.replace(microsecond=0)))
+
+    # TODO remove, just for testing
+    db.execute('''
+    REPLACE INTO tokens (token, time_expires)
+    VALUES (?, ?)''',
+               ("0", datetime.max))
+
     db.commit()
 
 
