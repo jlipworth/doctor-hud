@@ -82,32 +82,31 @@ p {
 .container {
   left: 50%;
   position: fixed;
-  top: 50%;
+  top: 30%;
   transform: translate(-50%, -50%);
 }
 
-/* ---------- LOGIN ---------- */
+/* ---------- Signup ---------- */
 
-#login form{
+#signup form{
 	width: 250px;
 }
-#login, .logo{
+#signup, .logo{
     display:inline-block;
     width:40%;
 }
-#login{
-border-right:1px solid #fff;
-  padding: 0px 22px;
+#signup{
+border-top:1px solid #fff;
+  padding: 10px 22px;
   width: 59%;
 }
 .logo{
 color:#fff;
 font-size:50px;
 line-height: 125px;
-margin-left: 30px;
 }
 
-#login form span.fa {
+#signup form span.fa {
 	background-color: #fff;
 	border-radius: 3px 0px 0px 3px;
 	color: #000;
@@ -120,7 +119,7 @@ margin-left: 30px;
 	width: 50px;
 }
 
-#login form input {
+#signup form input {
 	height: 50px;
 }
 fieldset{
@@ -129,7 +128,7 @@ fieldset{
     margin: 0;
 
 }
-#login form input[type="text"], input[type="password"] {
+#signup form input[type="text"], input[type="password"] {
 	background-color: #fff;
 	border-radius: 0px 3px 3px 0px;
 	color: #000;
@@ -138,7 +137,7 @@ fieldset{
 	width: 200px;
 }
 
-#login form input[type="submit"] {
+#signup form input[type="submit"] {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -151,15 +150,15 @@ fieldset{
   height: 30px;
 }
 
-#login form input[type="submit"]:hover {
+#signup form input[type="submit"]:hover {
 	background-color: #d44179;
 }
 
-#login > p {
+#signup > p {
 	text-align: center;
 }
 
-#login > p span {
+#signup > p span {
 	padding-left: 5px;
 }
 .middle {
