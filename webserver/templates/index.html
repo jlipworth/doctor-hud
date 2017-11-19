@@ -19,7 +19,7 @@
     <script src="static/dragula.js"></script>
     
     <form class="hiddenForm" action="/logout" method="post" id="logout-form"></form>
-
+    <form class="hiddenForm" action="/admin" method="get" id="admin-form"></form>    
     <nav class="navbar navbar-expand-md bg-dark navbar-dark sensorCard">
       <div class="container-fluid">
         <div class="navbar-brand">DoctorHUD</div>
@@ -27,6 +27,9 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="nav navbar-nav navbar-right">
+          {% if admin %}
+          <button class="btn btn-default navbar-btn titleButton" form="admin-form" type="submit">Admin Page</button>
+          {% endif %}
           <button class="btn btn-default navbar-btn titleButton">Help</button>
           <button class="btn btn-default navbar-btn titleButton" form="logout-form" type="submit">Log out</button>
         </ul>
@@ -110,10 +113,9 @@
         </div>
     </div>
     <!-- Web control-->
-    <div class="col-md-4">
-        <!-- Web control-->    
+    <!-- <div class="col-md-4">
         <span class="skype-chat" data-contact-id="live:jiangzha" data-can-collapse=true data-show-header=false></span>
-    </div>
+    </div> -->
     <!-- URI Button-->
     <!-- <div id="SkypeButton_Call_live:3a36e7ce1cc19fb1_1">
     <script type="text/javascript" src="https://secure.skypeassets.com/i/scom/js/skype-uri.js"></script>
@@ -127,5 +129,8 @@
      </script>
     </div> -->
 
-  </div></div></body>
+  </div></div>
+  <div class="col-md-4">
+      <span class="skype-chat" data-contact-id="live:jiangzha" data-can-collapse=true data-show-header=true></span>
+  </div></body>
 </html>
