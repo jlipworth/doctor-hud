@@ -13,10 +13,10 @@
 <body>
 
 <div class="main">
-    {% if wrongPassword %}
+    {% if error_message != "" %}
     <div class="alert alert-danger alert-dismissable" id="login-alert">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Password or username is not correct.
+        {{ error_message }}
     </div>
     {% endif %}
     <div class="container">

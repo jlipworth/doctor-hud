@@ -136,8 +136,11 @@ def index():
     if row is None or \
        datetime.strptime(row['access_begins'], "%Y-%m-%d %H:%M:%S") > now or \
        datetime.strptime(row['access_ends'], "%Y-%m-%d %H:%M:%S") < now:
-        return render_template('no_access.html')
-    if  session.get("admin_logged_in", True):
+        return render_template(
+            'login.html',
+            error_message="Login successful, but you have not been granted access at this time."
+        )
+    if session.get("admin_logged_in", True):
         return render_template('index.html', admin=True)
     else:
         return render_template('index.html', admin=False)
@@ -145,7 +148,7 @@ def index():
 
 @app.route("/login", methods=['GET'])
 def login_page():
-    return render_template('login.html', wrongPassword=False)
+    return render_template('login.html', error_message="")
 
 
 @app.route("/login", methods=['POST'])
@@ -166,7 +169,10 @@ def login_form():
             session['admin_logged_in'] = database_query_result['is_admin']
             return redirect('/')
 
-    return render_template('login.html', wrongPassword=True)
+    return render_template(
+        'login.html',
+        error_message="Password or username is not correct."
+    )
 
 
 @app.route("/login_token", methods=['POST'])
@@ -184,8 +190,10 @@ def login_token():
         session['logged_in_username'] = "Guest"
         return redirect('/')
 
-    # TODO "invalid token" message
-    return render_template('login.html', wrongPassword=True)
+    return render_template(
+        'login.html',
+        error_message="Token is invalid."
+    )
 
 
 # TODO probably don't support get here
