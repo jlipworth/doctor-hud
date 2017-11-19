@@ -1,0 +1,136 @@
+<html>
+  <head>
+    <script src="static/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <!-- <script type="text/javascript" src="static/jquery.cookie.js"></script> -->
+    <!-- <script type="text/javascript" src="static/underscore-min.js"></script> -->
+    <script src="static/echarts.js"></script>
+    <script src="https://swc.cdn.skype.com/sdk/v1/sdk.min.js"></script>
+    <script src="static/index.js"></script>
+    <link rel="stylesheet" href="/static/css/doctorHUD.css">
+    <link rel="stylesheet" href="static/css/dragula.css">
+  </head>
+
+  <body>
+    <script src="static/dragula.js"></script>
+    
+    <form class="hiddenForm" action="/logout" method="post" id="logout-form"></form>
+    <form class="hiddenForm" action="/admin" method="get" id="admin-form"></form>    
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark sensorCard">
+      <div class="container-fluid">
+        <div class="navbar-brand">DoctorHUD</div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="nav navbar-nav navbar-right">
+          {% if admin %}
+          <button class="btn btn-default navbar-btn titleButton" form="admin-form" type="submit">Admin Page</button>
+          {% endif %}
+          <button class="btn btn-default navbar-btn titleButton">Help</button>
+          <button class="btn btn-default navbar-btn titleButton" form="logout-form" type="submit">Log out</button>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="wideContainer container"><div class="row">
+    <div class="col-md-8"><div class = "row">
+      <div class="col-md-6" id = "sensor1">
+        <div class="col-md-12">
+          <div class="card sensorCard" style="width:400px">
+            <div class="card-header" role="tab" id="headingTwo">
+              <h5 class="mb-0">
+                <a class="nav-toggle" data-toggle="collapse" data-parent="#accordion" href="#" onClick = "onClick('#collapseTwo', this, 'etCO2')" aria-expanded="true" aria-controls="collapseTwo">
+                  Hide etCO2
+                </a>
+              </h5>
+            </div>
+            <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo">
+              <div class="card-block" id="etCO2" style="max-width:100%; width:400px; height:200px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="card sensorCard" style="width:400px">
+            <div class="card-header" role="tab" id="headingThree">
+              <h5 class="mb-0">
+                <a class="nav-toggle" data-toggle="collapse" data-parent="#accordion" href="#" onClick = "onClick('#collapseThree', this, 'respiration rate')" aria-expanded="true" aria-controls="collapseThree">
+                  Hide Respiration Rate
+                </a>
+              </h5>
+            </div>
+            <div id="collapseThree" class="collapse show" role="tabpanel" aria-labelledby="headingThree">
+              <div class="card-block" id="respiration_rate" style="max-width:100%; width:400px; height:200px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="card sensorCard" style="width:400px">
+            <div class="card-header" role="tab" id="headingFour">
+              <h5 class="mb-0">
+                <a class="nav-toggle" data-toggle="collapse" data-parent="#accordion" href="#" onClick = "onClick('#collapseFour', this, 'heart rate')" aria-expanded="true" aria-controls="collapseFour">
+                  Hide Heart Rate
+                </a>
+              </h5>
+            </div>
+            <div id="collapseFour" class="collapse show" role="tabpanel" aria-labelledby="headingFour">
+              <div class="card-block" id="heart_rate" style="max-width:100%; width:400px; height:200px;"></div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-6" id = "sensor2">
+        <div class="col-md-12">
+            <div class="card sensorCard" style="width:400px">
+                <div class="card-header" role="tab" id="headingOne">
+                    <h5 class="mb-0">
+                        <a class="nav-toggle" data-toggle="collapse" data-parent="#accordion" href="#" onClick = "onClick('#collapseOne', this, 'SpO2')" aria-expanded="true" aria-controls="collapseOne">
+                            Hide SpO2
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="card-block" id="SpO2" style="max-width:100%; width:400px; height:125px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+          <div class="card sensorCard" style="width:400px">
+            <div class="card-header" role="tab" id="headingFive">
+              <h5 class="mb-0">
+                <a class="nav-toggle" data-toggle="collapse" data-parent="#accordion" href="#" onClick = "onClick('#collapseFive', this, 'Blood Pressure')" aria-expanded="true" aria-controls="collapseFive">
+                  Hide Blood Pressure
+                </a>
+              </h5>
+            </div>
+            <div id="collapseFive" class="collapse show" role="tabpanel" aria-labelledby="headingFive">
+              <div class="card-block" id="line_chart" style="width:400px; height:300px;"></div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- Web control-->
+    <!-- <div class="col-md-4">
+        <span class="skype-chat" data-contact-id="live:jiangzha" data-can-collapse=true data-show-header=false></span>
+    </div> -->
+    <!-- URI Button-->
+    <!-- <div id="SkypeButton_Call_live:3a36e7ce1cc19fb1_1">
+    <script type="text/javascript" src="https://secure.skypeassets.com/i/scom/js/skype-uri.js"></script>
+     <script type="text/javascript">
+     Skype.ui({
+     "name": "call",
+     "element": "SkypeButton_Call_live:3a36e7ce1cc19fb1_1",
+     "participants": ["live:3a36e7ce1cc19fb1"],
+     "imageSize": 32
+     });
+     </script>
+    </div> -->
+
+  </div></div>
+  <div class="col-md-4">
+      <span class="skype-chat" data-contact-id="live:jiangzha" data-can-collapse=true data-show-header=true></span>
+  </div></body>
+</html>

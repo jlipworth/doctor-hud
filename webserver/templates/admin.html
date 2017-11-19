@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <script src="static/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    
+    <script src="static/admin.js"></script>
+    <link rel="stylesheet" href="/static/css/doctorHUD.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+  </head>
+
+  <body>
+
+    
+    <div class="main">
+      <div class="container">
+        <center>
+          <br/>
+          (All times are in UTC.)
+          <br/>
+          <br/>
+          
+          <div class="row">
+            <div class="col">
+              <table id="token_table" border="1" class="data_table"></table>
+              <br/>
+              <button id="token_button" class="admin_form">Generate new token</button>
+            </div>
+            <div class="col">
+              <table id="access_table" border="1" class="data_table"></table>
+              <br/>
+              <form id="access_form" action="">
+                <table class="admin_form">
+                  <tr>
+                    <td class="admin_form_text">Username to grant access: &nbsp;</td>
+                    <td>
+                      <select id="access_username">
+                        {% for u in usernames %}
+                        <option value="{{ u }}">{{ u }}</option>
+                        {% endfor %}
+                      </select>
+                    </td>
+                  </tr>
+                </table>
+                <table class="admin_form">
+                  <tr>
+                    <td class="admin_form_text">Access begins on: &nbsp;</td>
+                    <td style="text-align: right;">
+                      <input type="datetime-local" id="access_begins" />
+                    </td>
+                  </tr>
+                </table>
+                <table class="admin_form">
+                  <tr>
+                    <td class="admin_form_text">Access ends on: &nbsp;</td>
+                    <td style="text-align: right;">
+                      <input type="datetime-local" id="access_ends" />
+                    </td>
+                  </tr>
+                </table>
+                <button type="submit" class="admin_form">Give user access</button>
+              </form>
+            </div>
+          </div>
+        </center>
+
+      </div>
+    </div>
+
+    
+  </body>
+</html>

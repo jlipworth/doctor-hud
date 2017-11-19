@@ -1,0 +1,39 @@
+.data_td {
+    padding: 7px;
+}
+
+.data_table {
+    background-color: #f8f8f8;
+    width: 90%;
+}
+
+.admin_form {
+    width: 85%;
+}
+
+.admin_form_text {
+    width: 1%;
+    white-space: nowrap;
+}
+
+
+select {
+    background-color: #f8f8f8;
+    color: #000;
+    padding: 3px 4px;
+    width: 100%;
+}
+
+
+input[type="datetime-local"] {
+    background-color: #fff;
+    border-radius: 0px 3px 3px 0px;
+    color: #000;
+    padding: 0 16px;
+}
+
+
+body {
+    background-color: #fff3e7;
+}
+

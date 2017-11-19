@@ -1,0 +1,19 @@
+.wideContainer {
+    max-width: 1600px;
+}
+
+.left {
+    float: left;
+}
+
+.sensorCard {
+    margin-bottom: 10
+}
+
+.titleButton {
+    margin-left: 5
+}
+
+.hiddenForm {
+    display: none
+}
