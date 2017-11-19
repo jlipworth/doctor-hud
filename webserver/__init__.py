@@ -243,7 +243,7 @@ def generate_token():
 
     db = get_db()
     db.execute('INSERT INTO tokens (token, time_expires) VALUES (?, ?)',
-               (tok, expires))
+               (tok, expires.replace(microsecond=0)))
 
     db.commit()
 
@@ -385,7 +385,7 @@ REPLACE INTO user_access (username, access_begins, access_ends)
     db.execute('''
     REPLACE INTO tokens (token, time_expires)
     VALUES (?, ?)''',
-               ("0", datetime.max))
+               ("0", datetime.max.replace(microsecond=0)))
 
     db.commit()
 

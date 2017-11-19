@@ -5,10 +5,10 @@
 function get_tokens()
 {
     $.getJSON("/admin/get_tokens", function (l) {
-        var s = '<tr><th>Token</th><th>Expires on</th><th>Created on</th></tr>';
+        var s = '<tr><th class="data_td">Token</th><th class="data_td">Expires on</th><th class="data_td">Created on</th></tr>';
 
         for (var i in l) {
-            s += '<tr><td>' + l[i][0] + '</td><td>' + l[i][1] + '</td><td>' + l[i][2] + '</td></tr>'
+            s += '<tr><td class="data_td">' + l[i][0] + '</td><td class="data_td">' + l[i][1] + '</td><td class="data_td">' + l[i][2] + '</td></tr>'
         }
 
         $("#token_table").html(s);
@@ -18,10 +18,10 @@ function get_tokens()
 function get_accesses()
 {
     $.getJSON("/admin/get_accesses", function (l) {
-        var s = '<tr><th>Username</th><th>Access begins</th><th>Access ends</th></tr>';
+        var s = '<tr><th class="data_td">Username</th><th class="data_td">Access begins</th><th class="data_td">Access ends</th></tr>';
 
         for (var i in l) {
-            s += '<tr><td>' + l[i][0] + '</td><td>' + l[i][1] + '</td><td>' + l[i][2] + '</td></tr>'
+            s += '<tr><td class="data_td">' + l[i][0] + '</td><td class="data_td">' + l[i][1] + '</td><td class="data_td">' + l[i][2] + '</td></tr>'
         }
 
         $("#access_table").html(s);
@@ -37,8 +37,7 @@ $(document).ready(function() {
     $('#access_ends').val(new Date().toJSON().slice(0, 16));
 
     $("#token_button").click(function (e) {
-        $.post("/admin/generate_token").done(function (r) {});
-        get_tokens();
+        $.post("/admin/generate_token").done(function (r) {get_tokens();});
     });
 
     $("#access_form").submit(function (e) {
@@ -48,8 +47,6 @@ $(document).ready(function() {
             "username": $("#access_username option:selected").text(),
             "access_begins": $("#access_begins").val(),
             "access_ends": $("#access_ends").val()
-        }).done(function (r) {});
-
-        get_accesses();
+        }).done(function (r) {get_accesses();});
     });
 });

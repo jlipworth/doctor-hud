@@ -6,28 +6,67 @@
     
     <script src="static/admin.js"></script>
     <link rel="stylesheet" href="/static/css/doctorHUD.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
   </head>
 
   <body>
+
     
-    <p>
-      <table id="token_table" border="1"></table>
-      <button id="token_button">Generate new token</button>
-    </p>
-    
-    <p>
-      <table id="access_table" border="1"></table>
-      <form id="access_form" action="">
-        <select id="access_username">
-          {% for u in usernames %}
-          <option value="{{ u }}">{{ u }}</option>
-          {% endfor %}
-        </select> 
-        <input type="datetime-local" id="access_begins" />
-        <input type="datetime-local" id="access_ends" />
-        <button type="submit">Give user access</button>
-      </form>
-    </p>
+    <div class="main">
+      <div class="container">
+        <center>
+          <br/>
+          (All times are in UTC.)
+          <br/>
+          <br/>
+          
+          <div class="row">
+            <div class="col">
+              <table id="token_table" border="1" class="data_table"></table>
+              <br/>
+              <button id="token_button" class="admin_form">Generate new token</button>
+            </div>
+            <div class="col">
+              <table id="access_table" border="1" class="data_table"></table>
+              <br/>
+              <form id="access_form" action="">
+                <table class="admin_form">
+                  <tr>
+                    <td class="admin_form_text">Username to grant access: &nbsp;</td>
+                    <td>
+                      <select id="access_username">
+                        {% for u in usernames %}
+                        <option value="{{ u }}">{{ u }}</option>
+                        {% endfor %}
+                      </select>
+                    </td>
+                  </tr>
+                </table>
+                <table class="admin_form">
+                  <tr>
+                    <td class="admin_form_text">Access begins on: &nbsp;</td>
+                    <td style="text-align: right;">
+                      <input type="datetime-local" id="access_begins" />
+                    </td>
+                  </tr>
+                </table>
+                <table class="admin_form">
+                  <tr>
+                    <td class="admin_form_text">Access ends on: &nbsp;</td>
+                    <td style="text-align: right;">
+                      <input type="datetime-local" id="access_ends" />
+                    </td>
+                  </tr>
+                </table>
+                <button type="submit" class="admin_form">Give user access</button>
+              </form>
+            </div>
+          </div>
+        </center>
+
+      </div>
+    </div>
+
     
   </body>
 </html>
