@@ -108,21 +108,6 @@ def close_db(error):
         flask.g.sqlite_db.close()
 
 
-# # Return True when the user types the correct username and password
-# def _is_password_match(user_input_password, database_stored_password):
-#     # Split the password stored in the database to three parts
-#     password_anatomy = database_stored_password.split('$')
-#     algorithm = password_anatomy[0]
-#     salt = password_anatomy[1]
-#     correct_password_salted_hash = password_anatomy[2]
-#     # Check whether the passwords match
-#     hash_obj = hashlib.new(algorithm)
-#     user_input_password_salted = salt + user_input_password
-#     hash_obj.update(user_input_password_salted.encode('utf-8'))
-#     user_input_password_salted_hash = hash_obj.hexdigest()
-#     return user_input_password_salted_hash == correct_password_salted_hash
-
-
 @app.route("/", methods=['GET'])
 def index():
     if 'logged_in_username' not in session:
@@ -136,15 +121,16 @@ def index():
     if row is None or \
        datetime.strptime(row['access_begins'], "%Y-%m-%d %H:%M:%S") > now or \
        datetime.strptime(row['access_ends'], "%Y-%m-%d %H:%M:%S") < now:
+        session.clear()
         return render_template(
             'login.html',
             error_message="Login successful, but you have not been granted access at this time."
         )
-    if session.get("admin_logged_in", True):
-        return render_template('index.html', admin=True)
-    else:
-        return render_template('index.html', admin=False)
 
+    if session.get("admin_logged_in", False):
+        return render_template('index.html', admin=True)
+
+    return render_template('index.html', admin=False)
 
 @app.route("/login", methods=['GET'])
 def login_page():
@@ -183,11 +169,16 @@ def login_token():
                (datetime.utcnow(),))
     db.commit()
 
-    cur = db.execute('SELECT * FROM tokens WHERE token=?',
+    cur = db.execute('SELECT * FROM tokens WHERE token = ?',
                      (request.form['token'],))
 
     if cur.fetchone() is not None:
+        db.execute('DELETE FROM tokens WHERE token = ?',
+                   (request.form['token'],))
+        db.commit()
+
         session['logged_in_username'] = "Guest"
+        session['admin_logged_in'] = False
         return redirect('/')
 
     return render_template(
