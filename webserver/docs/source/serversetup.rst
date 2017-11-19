@@ -1,0 +1,65 @@
+Server Setup
+============
+
+Prerequisites
+-------------
+1. Python 3.5+
+2. JDK (either normal Oracle or OpenJDK) -- if compiling OpenICE.
+
+   - JDK 1.8+ (**remember to set JAVA_HOME**)
+   - JFX (use OpenJFX on linux)
+3. SQLite
+4. Bash shell
+
+
+OpenICE Startup
+---------------
+First, we have to ensure that OpenICE is running.
+
+There are two main ways to get OpenICE running:
+
+1. Downloading the latest release on github. There exists precompiled versions for Windows and Mac. These are in the form of *.exe* and *.pkg* respectively.
+
+   The latest release (0.6.3) can be downloaded `here
+   <https://github.com/mdpnp/mdpnp/releases/tag/0.6.3>`_.
+
+
+2. Compiling it from source. We have included a git submodule in our project under the openice directory. Compiling it necessary to run OpenICE on Linux.
+
+   To start OpenICE, start from the project root directory and navigate to the **openice** directory. Then, startup OpenICE via gradle.
+   
+   .. code-block:: bash
+                   
+      cd openice
+      ./gradlew :interop-lab:demo-apps:run
+
+
+Once it's started, we need to create an adapter so we can pull information from. For our demo purposes, we use the simulated multiparameter monitor. We need to create an adapter:
+
+<insert image here>
+
+Then, we need to select **Simulated Multiparameter Monitor**.
+
+<insert image here>
+
+Once the monitor is created, you can leave it hidden or you can double-click on it to see the actual simulated display:
+
+<insert image here>
+
+
+Webserver Startup
+-----------------
+Once all the prerequisites are installed, we need to navigate and startup the webserver. This is relatively simple as we bundle it into one script.
+
+To start the webserver, start from the project root directory and navigate to the **webserver** directory. Then, trigger the server script.
+
+.. code-block:: bash
+
+   cd webserver
+   ./server.sh
+
+This will initialize the input of data from OpenICE as well as start the webserver with the running information. It interacts on its own with the SQLite instance, which allows us to store our credentials and schedules.
+
+
+
+
