@@ -16,7 +16,7 @@ from geventwebsocket.exceptions import WebSocketError
 
 DATABASE_FILENAME = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
-    'var', 'database.db'
+    'database.db'
 )
 
 app = Flask(__name__)

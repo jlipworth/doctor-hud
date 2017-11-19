@@ -2,24 +2,6 @@ var obj;
 var metric_dict = {};
 var useRandomData = false;
 
-(function () {
-    var data_socket = new WebSocket("ws://" + location.host + "/data");
-
-    data_socket.onmessage = function (e) {
-        //$("#testo").html(e.data);
-        obj = JSON.parse(e.data);
-        for (var metric in obj) {
-            metric_dict[metric] = obj[metric];
-        }
-        // document.getElementById("testo").innerHTML = "";
-        // for (var metric in metric_dict) {
-        //     document.getElementById("testo").innerHTML += metric + ": " +
-        //     metric_dict[metric] + "<br>";
-        // }
-    };
-
-})();
-
 function gauge(dom, input, name, max, colorStyle) {
     var option = {
         tooltip : {
@@ -228,6 +210,23 @@ function onClick (href, toggle_switch, type) {
 }
 
 $(document).ready(function() {
+    var websocket_proto = window.location.href.indexOf("https://") == 0 ? "wss://" : "ws://";
+
+    var data_socket = new WebSocket(websocket_proto + location.host + "/data");
+
+    data_socket.onmessage = function (e) {
+        //$("#testo").html(e.data);
+        obj = JSON.parse(e.data);
+        for (var metric in obj) {
+            metric_dict[metric] = obj[metric];
+        }
+        // document.getElementById("testo").innerHTML = "";
+        // for (var metric in metric_dict) {
+        //     document.getElementById("testo").innerHTML += metric + ": " +
+        //     metric_dict[metric] + "<br>";
+        // }
+    };
+
     var input = '';
     var drake = dragula([document.getElementById('sensor1'), document.getElementById('sensor2')])
     bar(document.getElementById('SpO2'), 'sp_o2');
