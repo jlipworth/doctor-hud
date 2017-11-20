@@ -1,15 +1,15 @@
-Welcome to doctorHUD's documentation!
+Welcome to DoctorHUD's documentation!
 =====================================
 
-Explanation
------------
-Our project's idea is to provide a simple way to provide patient sensor data to remote doctors securely over the web. We provide a simple interface for customizing the sensor display.
+Quick Routes
+------------
 
+If you want to know how to set start everything from scratch, start at
+`server setup <serversetup.html>`_.
 
-If you want to know how to set start everything from scratch, start at 
+If you want more information on the web interface's operation go to the `remote doctor operation <mainoperation.html>`_.
 
-
-
+If you need help starting the client web app, go to the `client setup <clientsetup.html>`_.
 
 .. toctree::
    :maxdepth: 2

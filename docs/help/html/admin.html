@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Admin Operation &mdash; doctorHUD 1.1 documentation</title>
+  <title>Admin Operation &mdash; DoctorHUD 1.1 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="doctorHUD 1.1 documentation" href="index.html"/>
+    <link rel="top" title="DoctorHUD 1.1 documentation" href="index.html"/>
         <link rel="next" title="Frequently Asked Questions" href="FAQ.html"/>
         <link rel="prev" title="Remote Doctor Operation" href="mainoperation.html"/> 
 
@@ -56,7 +56,7 @@
           
 
           
-            <a href="masterdoc.html" class="icon icon-home"> doctorHUD
+            <a href="masterdoc.html" class="icon icon-home"> DoctorHUD
           
 
           
@@ -99,6 +99,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="mainoperation.html">Remote Doctor Operation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Admin Operation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-to-admin-page">Getting to Admin Page</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#issue-token-to-user">Issue Token to User</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#adding-user-to-calendar-slot">Adding User to Calendar Slot</a></li>
 </ul>
@@ -121,7 +122,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="masterdoc.html">doctorHUD</a>
+          <a href="masterdoc.html">DoctorHUD</a>
         
       </nav>
 
@@ -171,16 +172,21 @@
   <div class="section" id="admin-operation">
 <h1>Admin Operation<a class="headerlink" href="#admin-operation" title="Permalink to this headline">¶</a></h1>
 <p>The admin position is relatively simple, but it still is the gateway for allowing users to actually login and gain access to specific hospital rooms. The admin can issue the immediate temporary tokens to user, as well as setup existing users with calendar slots for specific rooms.</p>
+<div class="section" id="getting-to-admin-page">
+<h2>Getting to Admin Page<a class="headerlink" href="#getting-to-admin-page" title="Permalink to this headline">¶</a></h2>
+<p>The admin must login with their credentials first, then navigate to the admin page. They will have a button in the banner that will redirect them.</p>
+<img alt="_images/sensors-adminbutton.png" class="align-center" src="_images/sensors-adminbutton.png" />
+</div>
 <div class="section" id="issue-token-to-user">
 <h2>Issue Token to User<a class="headerlink" href="#issue-token-to-user" title="Permalink to this headline">¶</a></h2>
 <p>Click the generate token button on the left side.</p>
-<p>&lt;insert image here&gt;</p>
+<img alt="_images/admin-token.png" class="align-center" src="_images/admin-token.png" />
 <p>The token number can be distributed, and it will last for up to five minutes. After that the token expires, and a new one will have to be generated. Tokens can only be used once.</p>
 </div>
 <div class="section" id="adding-user-to-calendar-slot">
 <h2>Adding User to Calendar Slot<a class="headerlink" href="#adding-user-to-calendar-slot" title="Permalink to this headline">¶</a></h2>
 <p>Select the user in the bottom right of the window and alter the access begin and end times to adjust for when a user can gain access.</p>
-<p>&lt;insert image here&gt;</p>
+<img alt="_images/admin-calendar.png" class="align-center" src="_images/admin-calendar.png" />
 <p>Multiple users can access the same room at the same time, provided that they are recorded in the access table.</p>
 </div>
 </div>

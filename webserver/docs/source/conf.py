@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# doctorHUD documentation build configuration file, created by
+# DoctorHUD documentation build configuration file, created by
 # sphinx-quickstart on Sat Nov 18 23:21:22 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -52,7 +52,7 @@ source_suffix = '.rst'
 master_doc = 'masterdoc'
 
 # General information about the project.
-project = 'doctorHUD'
+project = 'DoctorHUD'
 copyright = '2017, Albert Morgese, Jingyi Qing, Jonathan Lipworth, Jiang Zhang'
 author = 'Albert Morganese, Jingyi Qing, Jonathan Lipworth, Jiang Zhang'
 
@@ -118,7 +118,7 @@ html_sidebars = {
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'doctorHUDdoc'
+htmlhelp_basename = 'DoctorHUDdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -145,7 +145,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'doctorHUD.tex', 'doctorHUD Documentation',
+    (master_doc, 'DoctorHUD.tex', 'DoctorHUD Documentation',
      'Albert Morganese, Jingyi Qing, Jonathan Lipworth, Jiang Zhang', 'manual'),
 ]
 
@@ -155,7 +155,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'doctorhud', 'doctorHUD Documentation',
+    (master_doc, 'doctorhud', 'DoctorHUD Documentation',
      [author], 1)
 ]
 
@@ -166,8 +166,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'doctorHUD', 'doctorHUD Documentation',
-     author, 'doctorHUD', 'One line description of project.',
+    (master_doc, 'DoctorHUD', 'DoctorHUD Documentation',
+     author, 'DoctorHUD', 'One line description of project.',
      'Miscellaneous'),
 ]
 
