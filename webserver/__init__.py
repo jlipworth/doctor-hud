@@ -209,7 +209,7 @@ def create_account():
         # TODO "username taken" error
         return redirect('/create_account')
 
-    salt = os.urandom(16)
+    salt = os.urandom(64)
     password_hash = scrypt.hash(request.form['password'], salt)
 
     db.execute('INSERT INTO users (username, password_hash, password_salt, is_admin)'
@@ -328,66 +328,6 @@ def data_socket(ws):
 
 
 Thread(target=openice_proc).start()
-
-with app.app_context():
-    db = get_db()
-    db.cursor().execute('''
-CREATE TABLE IF NOT EXISTS users (
-    username TEXT NOT NULL PRIMARY KEY,
-    password_hash BLOB NOT NULL,
-    password_salt BLOB NOT NULL,
-    is_admin INTEGER NOT NULL DEFAULT 0,
-    time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)''')
-#     db.cursor().execute('''
-# CREATE TABLE IF NOT EXISTS admin_password (
-#     password_hash BLOB NOT NULL,
-#     password_salt BLOB NOT NULL,
-#     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-# )''')
-    db.cursor().execute('''
-CREATE TABLE IF NOT EXISTS user_access (
-    username TEXT NOT NULL,
-    access_begins TIMESTAMP NOT NULL,
-    access_ends TIMESTAMP NOT NULL
-)''')
-    db.cursor().execute('''
-CREATE TABLE IF NOT EXISTS tokens (
-    token TEXT NOT NULL PRIMARY KEY,
-    time_expires TIMESTAMP NOT NULL,
-    time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)''')
-
-    # TODO do this in server installation
-    db.execute('''
-REPLACE INTO users (username, password_hash, password_salt, is_admin)
-    VALUES (?, ?, ?, ?)''',
-               ("admin", scrypt.hash(b"password", b"\0"), b"\0", 1))
-
-    # "Guest" account for token login, can't actually log in directly
-    db.execute('''
-REPLACE INTO users (username, password_hash, password_salt, is_admin)
-    VALUES (?, ?, ?, ?)''',
-               ("Guest", os.urandom(128), b"\0", 0))
-
-    db.execute('''
-REPLACE INTO user_access (username, access_begins, access_ends)
-    VALUES (?, ?, ?)''',
-               ("admin", datetime.min, datetime.max.replace(microsecond=0)))
-
-    # TODO unneccesary?
-    db.execute('''
-REPLACE INTO user_access (username, access_begins, access_ends)
-    VALUES (?, ?, ?)''',
-               ("Guest", datetime.min, datetime.max.replace(microsecond=0)))
-
-    # TODO remove, just for testing
-    db.execute('''
-    REPLACE INTO tokens (token, time_expires)
-    VALUES (?, ?)''',
-               ("0", datetime.max.replace(microsecond=0)))
-
-    db.commit()
 
 
 if __name__ == "__main__":
