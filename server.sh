@@ -1,5 +1,8 @@
 #!/bin/bash
 
+cd webserver
+
+source venv/bin/activate
 
 printf "SECRET_KEY = " > config.py
 python3 -c "import os; print(repr(os.urandom(64)))" >> config.py

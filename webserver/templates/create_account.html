@@ -12,6 +12,13 @@
 
   <body>
   <div class="main">
+    {% if error_message != "" %}
+    <div class="alert alert-danger alert-dismissable" id="login-alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{ error_message }}
+    </div>
+    {% endif %}
+    
     <div class="container">
       <center>
         <div class="logo">Sign up
@@ -19,12 +26,14 @@
         </div>
         <div class="middle">
           <div id="signup">
-            <form action='/login' method='post' enctype='multipart/form-data'>
+            <form action='/create_account' method='post' enctype='multipart/form-data'>
               <fieldset class="clearfix">
                 <p ><span class="fa fa-user"></span><input type="text" name='username' id="inputUsername" class="form-control" placeholder="username" required autofocus></p>
                 <p><span class="fa fa-lock"></span><input type="password" name='password' id="inputPassword" class="form-control" placeholder="password" required></p>
                 <div>
-                  <span style="width:50%; text-align:right;  display: inline-block;"><button class = "btn btn-success" type="submit">Create account</button></span>
+                  <button class="btn btn-success" type="submit">Create account</button>
+                  <br/>
+                  <a class="btn btn-info" href="https://jlipworth.github.io/doctor-hud/help/html/mainoperation.html#" style="margin-top: 10px;">Help</a>
                 </div>
               </fieldset>
               <div class="clearfix"></div>

@@ -19,6 +19,7 @@
     <script src="static/dragula.js"></script>
     
     <form class="hiddenForm" action="/logout" method="post" id="logout-form"></form>
+    <form class="hiddenForm" action="https://jlipworth.github.io/doctor-hud/help/html/mainoperation.html#displaying-hiding-sensors" method="get" id="help-form"></form>    
     <form class="hiddenForm" action="/admin" method="get" id="admin-form"></form>    
     <nav class="navbar navbar-expand-md bg-dark navbar-dark sensorCard">
         <div class="container-fluid">
@@ -34,7 +35,7 @@
                 {% if admin %}
                 <button class="btn btn-default navbar-btn titleButton" form="admin-form" type="submit">Admin Page</button>
                 {% endif %}
-                <button class="btn btn-default navbar-btn titleButton">Help</button>
+                <button class="btn btn-default navbar-btn titleButton" form="help-form" type="submit">Help</button>
                 <button class="btn btn-default navbar-btn titleButton" form="logout-form" type="submit">Logout</button>
             </ul>
         </div>

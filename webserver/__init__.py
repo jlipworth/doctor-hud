@@ -201,7 +201,7 @@ def logout():
 
 @app.route("/create_account", methods=['GET'])
 def create_account_page():
-    return render_template("create_account.html")
+    return render_template("create_account.html", error_message="")
 
 
 @app.route("/create_account", methods=['POST'])
@@ -212,7 +212,8 @@ def create_account():
     database_query_result = cur.fetchone()
     if database_query_result is not None:
         # TODO "username taken" error
-        return redirect('/create_account')
+        return redirect('/create_account',
+                        error_message="Account name is already in use.")
 
     salt = os.urandom(64)
     password_hash = scrypt.hash(request.form['password'], salt)
@@ -223,7 +224,8 @@ def create_account():
 
     db.commit()
 
-    # TODO "account successfully created"
+    session['logged_in_username'] = request.form['username']
+    session['admin_logged_in'] = False
     return redirect('/')
 
 
