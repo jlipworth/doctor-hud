@@ -53,7 +53,7 @@ master_doc = 'masterdoc'
 
 # General information about the project.
 project = 'doctorHUD'
-copyright = '2017, Albert Morganese, Jingyi Qing, Jonathan Lipworth, Jiang Zhang'
+copyright = '2017, Albert Morgese, Jingyi Qing, Jonathan Lipworth, Jiang Zhang'
 author = 'Albert Morganese, Jingyi Qing, Jonathan Lipworth, Jiang Zhang'
 
 # The version info for the project you're documenting, acts as replacement for
