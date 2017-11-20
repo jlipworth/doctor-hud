@@ -6,12 +6,11 @@ Google Chrome is recommended for our client interface.
 ### Connection
 Go to the [connection page](https://jlipworth.github.io/doctor-hud/) and select an existing server to connect to. 
 
-If you want to try out a running server with TLS secure communication, select the "Online Test Server" option.  
-If you're running and testing on your own local server, select "Local Test Server" option.  
-The "Fake Hospital" options are left as placeholders for real hospital servers, which doesn't have any real usage yet.
+If you want to try out a running server with TLS secure communication, select the "Online Test Server" option.  If you want to test on your own local server, select "Local Test Server" option.
 
 ### Log in 
 Test account on Online Test Server: username **test**, password **test**
+
 This account has been granted permanent access.  Feel free to log in and play around.
 
 Please refer to the [main operation help page](https://jlipworth.github.io/doctor-hud/help/html/mainoperation.html) for a detailed introduction on all the client side features. 
