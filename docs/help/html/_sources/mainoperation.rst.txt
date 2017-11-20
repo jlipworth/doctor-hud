@@ -15,24 +15,28 @@ Creating Account
 ----------------
 To create permanent credentials as a doctor, a new account should be made. This can reached through the login page.
 
-
+.. image:: pictures/login-create.png
+   :align: center
 
 Filling this form and submitting it will store these credentials to be used in the future.
 
 .. image:: pictures/login-signup.png
    :align: center
+   :scale: 75
 
 Login via Credentials
 ---------------------
 Logging in with credentials to a specific room requires a calendar slot to be setup in advance by an admin. If this has been setup, loggin in with credentials should bring the user directly to the sensor display for the particular room.
 
-<insert image here>
+.. image:: pictures/login-credentials.png
+   :align: center
 
 Login via Token
 ---------------
 When immediate assistance is required, sometimes there isn't enough time to assign a calendar slot, or setup a new account if the remote doctor does not have one yet. Admins can create temporary tokens for a specific room, which can be used in a different field at the login screen.
 
-<insert image here>
+.. image:: pictures/login-token.png
+   :align: center
 
 Displaying + Hiding Sensors
 ---------------------------
@@ -59,13 +63,10 @@ The sensors can be moved around in the two separate columns. The entire sensor w
    :align: center
 
 
-.. Brief Explanation
-.. -----------------
-.. Crapola
-.. 
-.. Initiate Chat
-.. -------------
-.. crap
+Skype Integration
+-----------------
+<Fill in>
+
 
 Logout
 ------
