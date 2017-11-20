@@ -4,12 +4,12 @@ Welcome to DoctorHUD's documentation!
 Quick Routes
 ------------
 
-If you want to know how to set start everything from scratch, start at
+If you want to know how to set everything from scratch, start at
 `server setup <serversetup.html>`_.
 
-If you want more information on the web interface's operation go to the `remote doctor operation <mainoperation.html>`_.
+If you want information on how to use the web interface, go to `remote doctor operation <mainoperation.html>`_.
 
-If you need help starting the client web app, go to the `client setup <clientsetup.html>`_.
+If you need help starting the client webapp, go to `client setup <clientsetup.html>`_.
 
 .. toctree::
    :maxdepth: 2

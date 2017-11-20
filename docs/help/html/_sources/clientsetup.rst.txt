@@ -3,7 +3,7 @@ Client Setup
 
 Prerequisites
 -------------
-1. Modern Internet Browser - Chrome, Firefox, Safari are preferred.
+1. A modern internet browser - Chrome is preferred for Skype plugin support, but Firefox and Safari work otherwise.
 2. An active Skype account.
 
 Startup
