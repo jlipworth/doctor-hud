@@ -21,7 +21,7 @@ Please refer to the [main operation help page](https://jlipworth.github.io/docto
 
 With this account, an "Admin Page" button is available on the navigation bar of the main page. 
 
-For a detailed introduction to all admin operations, please see the [admin help page](https://jlipworth.github.io/doctor-hud/help/html/admin.html).
+For detailed introduction on all admin operations, please see the [admin help page](https://jlipworth.github.io/doctor-hud/help/html/admin.html).
 
 ## Server Side Quick Start
 To set up and test on a local server, follow the steps on [server setup instructions](https://jlipworth.github.io/doctor-hud/help/html/serversetup.html).
