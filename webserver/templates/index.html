@@ -18,9 +18,9 @@
 <body>
     <script src="static/dragula.js"></script>
     
-    <form class="hiddenForm" action="/logout" method="post" id="logout-form"></form>
-    <form class="hiddenForm" action="https://jlipworth.github.io/doctor-hud/help/html/mainoperation.html#displaying-hiding-sensors" method="get" target="_blank" id="help-form"></form>    
-    <form class="hiddenForm" action="/admin" method="get" id="admin-form"></form>    
+
+
+
     <nav class="navbar navbar-expand-md bg-dark navbar-dark sensorCard">
         <div class="container-fluid">
             <div class="navbar-brand">DoctorHUD</div>
@@ -33,10 +33,17 @@
             </button>
             <ul class="nav navbar-nav navbar-right">
                 {% if admin %}
-                <button class="btn btn-default navbar-btn titleButton" form="admin-form" type="submit">Admin Page</button>
+                <form action="/admin" method="get" id="admin-form" style="margin-bottom:0">
+                    <button class="btn btn-default navbar-btn titleButton" type="submit">Admin Page</button>
+                </form>
                 {% endif %}
-                <button class="btn btn-default navbar-btn titleButton" form="help-form" type="submit">Help</button>
-                <button class="btn btn-default navbar-btn titleButton" form="logout-form" type="submit">Logout</button>
+                <form action="https://jlipworth.github.io/doctor-hud/help/html/mainoperation.html#displaying-hiding-sensors" method="get" target="_blank" id="help-form" style="margin-bottom:0">
+                    <button class="btn btn-default navbar-btn titleButton" type="submit">Help</button>
+                </form>
+                <form action="/logout" method="post" id="logout-form" style="margin-bottom:0">
+                    <button class="btn btn-default navbar-btn titleButton" type="submit">Logout</button>
+                </form>
+
             </ul>
         </div>
     </nav>
