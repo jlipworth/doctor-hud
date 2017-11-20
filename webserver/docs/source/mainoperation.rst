@@ -65,9 +65,21 @@ The sensors can be moved around in the two separate columns. The entire sensor w
 
 Skype Integration
 -----------------
-<Fill in>
+Skype web control is integrated as part of the web application. First time user needs to sign in their own Skype account. 
 
+.. image:: pictures/skype-signin.png
+   :align: center
 
+To launch a Skype video call to the hospital operating doctor, click the call button on the top right corner of the Skype chat canvas. The destination contact for every hospital is predefined when the server is setup. The chat canvas will show the video once the call is picked up.
+
+.. image:: pictures/skype-call.png
+   :align: center
+
+Notice that initiating a call through Skype web control is only supported on Google Chrome, Microsoft Edge, and requires HTTPS connection. If you're using other browsers or testing on your local server without HTTPS, please click the Skype call button in the navigation bar. This will invoke the desktop version of Skype installed on your computer and send the call. 
+
+.. image:: pictures/skype-button.png
+   :align: center
+   
 Logout
 ------
 To logout of the session, click the logout button in the top banner:
