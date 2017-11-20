@@ -108,6 +108,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#sensor-update-frequency">Sensor Update Frequency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#calendar-appointment-setup">Calendar/Appointment Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#skype-destination">Skype Destination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#disconnect-token-users">Disconnect Token Users</a></li>
 </ul>
 </li>
 </ul>
@@ -175,13 +176,12 @@
 <h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="contact">
 <h2>Contact<a class="headerlink" href="#contact" title="Permalink to this headline">¶</a></h2>
-<p>If you have any questions or issues, please raise an issue in our github repository:</p>
-<p><a class="reference external" href="https://github.com/jlipworth/doctor-hud/issues">jlipworth/doctor-hud</a>.</p>
+<p>If you have any questions or issues, please raise an issue in our <a class="reference external" href="https://github.com/jlipworth/doctor-hud/issues">github repository</a>.</p>
 </div>
 <div class="section" id="platform-support">
 <h2>Platform Support<a class="headerlink" href="#platform-support" title="Permalink to this headline">¶</a></h2>
-<p>We support all major platforms, but server support on Windows requires a bash shell, but also requires the shell scripts to be in LF-style line endings, unless bash is configured to run with CRLF endings.</p>
-<p>Client support is even less limited to only the browser. The only limits are a capable browser, and our Skype integration plugin is supported on the machine.</p>
+<p>We support all major POSIX-compliant platforms (namely, Linux and OS X).  To deploy the server on Windows, a bash shell is required, and the files must be converted from CRLF to LF line endings.</p>
+<p>The client functions on all major web browsers. Chrome is preferred, as it supports the Skype web plugin. Firefox and Safari also work, but the Skype call button must be used instead of the plugin.  Edge also supports the Skype plugin, but there may be minor display issues.</p>
 </div>
 <div class="section" id="additional-sensors">
 <h2>Additional Sensors<a class="headerlink" href="#additional-sensors" title="Permalink to this headline">¶</a></h2>
@@ -189,15 +189,19 @@
 </div>
 <div class="section" id="sensor-update-frequency">
 <h2>Sensor Update Frequency<a class="headerlink" href="#sensor-update-frequency" title="Permalink to this headline">¶</a></h2>
-<p>Currently the sensor data updates once a second. This isn’t nearly as granular as analog sensors, but it does allow us to support the data over almost all connections.</p>
+<p>Currently, the sensor data updates once a second.</p>
 </div>
 <div class="section" id="calendar-appointment-setup">
 <h2>Calendar/Appointment Setup<a class="headerlink" href="#calendar-appointment-setup" title="Permalink to this headline">¶</a></h2>
-<p>An admin can setup appointments for certain hospital rooms at certain times. The admin would need to login and add particular user to a calendar slot and associated hospital room.</p>
+<p>An admin for a particular hospital can setup appointments at certain times. The procedure is described in the <a class="reference external" href="admin.html">admin section</a>.</p>
 </div>
 <div class="section" id="skype-destination">
 <h2>Skype Destination<a class="headerlink" href="#skype-destination" title="Permalink to this headline">¶</a></h2>
-<p>The Skype destination for a particular hospital room is setup upon initial server setup.</p>
+<p>The Skype destination for a particular hospital room is set up upon initial server setup.</p>
+</div>
+<div class="section" id="disconnect-token-users">
+<h2>Disconnect Token Users<a class="headerlink" href="#disconnect-token-users" title="Permalink to this headline">¶</a></h2>
+<p>To disconnect any users logged in with tokens, simply restart the server, and all users will be required to reauthenticate.</p>
 </div>
 </div>
 

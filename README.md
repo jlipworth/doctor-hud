@@ -4,24 +4,24 @@ DoctorHUD delivers patient sensor data to remote doctors securely over the web i
 ## Client Side Quick Start
 Google Chrome is recommended for our client interface.
 ### Connection
-Goto the [connection page](https://jlipworth.github.io/doctor-hud/) and select a existing server to connect to. 
+Go to the [connection page](https://jlipworth.github.io/doctor-hud/) and select an existing server to connect to. 
 
-If you want to try out a running server with TLS secure communication. Select the "online test server" option.  
+If you want to try out a running server with TLS secure communication, select the "Online Test Server" option.  
 If you're running and testing on your own local server, select "Local Test Server" option.  
 The "Fake Hospital" options are left as placeholders for real hospital servers, which doesn't have any real usage yet.
 
 ### Log in 
-Test guest account:   **username=test, password=test**, which has been granted infinite access permission to connect to the online test server. Click log in and feel free to play around.
+Test account on Online Test Server: username **test**, password **test**
+This account has been granted permanent access.  Feel free to log in and play around.
 
 Please refer to the [main operation help page](https://jlipworth.github.io/doctor-hud/help/html/mainoperation.html) for a detailed introduction on all the client side features. 
 
 ### Admin Operations
-**The admin credential can be found at the comment of our Beta release Canvas submission.**
+**Admin account credentials can be found in the comment of our Beta release Canvas submission.**
 
-Log in with this account, and see this click the "Admin" button on the navigation bar of the main page to reach the admin page. 
+With this account, an "Admin Page" button is available on the navigation bar of the main page. 
 
-For a detailed introduction to all admin operations, please goto the [admin help page]
-(https://jlipworth.github.io/doctor-hud/help/html/admin.html)
+For detailed introduction on all admin operations, please see the [admin help page](https://jlipworth.github.io/doctor-hud/help/html/admin.html).
 
 ## Server Side Quick Start
-To set up and test on a local server. Follow the steps on [server setup instructions](https://jlipworth.github.io/doctor-hud/help/html/serversetup.html)
+To set up and test on a local server, follow the steps on [server setup instructions](https://jlipworth.github.io/doctor-hud/help/html/serversetup.html).

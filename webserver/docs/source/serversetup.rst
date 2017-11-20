@@ -14,11 +14,9 @@ Prerequisites
 
 OpenICE Startup
 ---------------
-First, we have to ensure that OpenICE is running.
+First, we have to ensure that OpenICE is running.  There are two main ways to get OpenICE running:
 
-There are two main ways to get OpenICE running:
-
-1. Downloading the latest release on github. There exists precompiled versions for Windows and Mac. These are in the form of *.exe* and *.pkg* respectively.
+1. Downloading the latest release on github. There are precompiled versions for Windows and Mac, in the form of *.exe* and *.pkg* respectively.
 
    The latest release (0.6.3) can be downloaded `here
    <https://github.com/mdpnp/mdpnp/releases/tag/0.6.3>`_.
@@ -35,37 +33,43 @@ There are two main ways to get OpenICE running:
       ./gradlew :interop-lab:demo-apps:run
 
 
-Once it's started, the OpenICE supervisor should be opened.
+Once it's started, the OpenICE launch window will open:
 
 .. image:: pictures/openice-initial.png
    :align: center
 
 Start the supervisor.
 
-We need to create an adapter so we can pull information from. For our demo purposes, we use the **simulated multiparameter monitor**. This can be done by creating a device adapter.
+An adapter is needed to pull information from. For demo purposes, you can use the **simulated multiparameter monitor**:
 
 .. image:: pictures/openice-adapter.png
    :align: center
 
-Once the monitor is created, you can leave it hidden or you can double-click on it to see the actual simulated display:
+Once the monitor is created, you can leave it hidden, or you can double-click on it to see the simulated display:
 
 .. image:: pictures/openice-sensordisplay.png
    :align: center
 
 Webserver Startup
 -----------------
-Once all the prerequisites are installed (jdk and jfx will not be needed here), we need to setup and startup the webserver. This is relatively simple as we bundle it into two scripts -- both are located in the project root directory.
+Once all the prerequisites are installed (JDK and JFX optional), you need to set up and start the webserver. This is relatively simple as we bundle it into two scripts, both of which are located in the project root directory.
 
-Setting up the webserver only has to be done the first time to fetch python plugins that will run the webserver:
+Setting up the webserver only has to be done the first time, to fetch python dependencies and initialize the database.  You will be prompted for the username and password for the admin account, as well as the Skype account associated with the server:
 
 .. code-block:: bash
 
    ./setup.sh
 
-To start the webserver, start from the project root directory and navigate to the **webserver** directory. Then, trigger the server script:
+To start the server:
 
 .. code-block:: bash
 
    ./server.sh
 
-This will initialize the input of data from OpenICE as well as start the webserver with the running information. It interacts on its own with the SQLite instance, which allows us to store our credentials and schedules.
+This will start the webserver and initialize the interface with OpenICE.  It interacts on its own with an SQLite database, which stores login credentials and access schedules.  A TLS certificate (**fullchain.pem** and **privkey.pem**) are required to run the server in production.  To test the server locally without TLS certificates, instead run:
+
+.. code-block:: bash
+
+   ./server.sh --no-init
+
+
