@@ -24,7 +24,7 @@
         <div class="container-fluid">
             <div class="navbar-brand">DoctorHUD</div>
             <script type="text/javascript" src="http://cdn.dev.skype.com/uri/skype-uri.js"></script>
-            <a onclick="Skype.tryAnalyzeSkypeUri('call', '0');" href="skype:live:jiangzha?call">
+            <a onclick="Skype.tryAnalyzeSkypeUri('call', '0');" href="skype:live:{{ skype_account }}?call">
                 <img role="Button" src="static/callbutton_32px.png">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -135,6 +135,6 @@
 
 </div></div>
 <div class="col-md-4">
-    <span class="skype-chat" data-contact-id="live:jiangzha" data-can-collapse=true data-show-header=true></span>
+    <span class="skype-chat" data-contact-id="live:{{ skype_account }}" data-can-collapse=true data-show-header=true></span>
 </div></body>
 </html>

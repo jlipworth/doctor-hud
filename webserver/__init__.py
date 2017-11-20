@@ -127,10 +127,15 @@ def index():
             error_message="Login successful, but you have not been granted access at this time."
         )
 
-    if session.get("admin_logged_in", False):
-        return render_template('index.html', admin=True)
+    cur = db.execute('SELECT * FROM skype_account')
+    skype_account = cur.fetchone()['account_name']
 
-    return render_template('index.html', admin=False)
+    if session.get("admin_logged_in", False):
+        return render_template('index.html',
+                               admin=True, skype_account=skype_account)
+
+    return render_template('index.html',
+                           admin=False, skype_account=skype_account)
 
 @app.route("/login", methods=['GET'])
 def login_page():
