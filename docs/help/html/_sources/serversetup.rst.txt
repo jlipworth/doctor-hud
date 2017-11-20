@@ -22,7 +22,7 @@ There are two main ways to get OpenICE running:
 
    The latest release (0.6.3) can be downloaded `here
    <https://github.com/mdpnp/mdpnp/releases/tag/0.6.3>`_.
-
+  | 
 
 2. Compiling it from source. We have included a git submodule in our project under the openice directory. Compiling it necessary to run OpenICE on Linux.
 

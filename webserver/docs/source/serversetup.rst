@@ -27,9 +27,9 @@ There are two main ways to get OpenICE running:
 2. Compiling it from source. We have included a git submodule in our project under the openice directory. Compiling it necessary to run OpenICE on Linux.
 
    To start OpenICE, start from the project root directory and navigate to the **openice** directory. Then, startup OpenICE via gradle.
-   
+
    .. code-block:: bash
-                   
+
       cd openice
       ./gradlew :interop-lab:demo-apps:run
 
@@ -68,7 +68,3 @@ To start the webserver, start from the project root directory and navigate to th
    ./server.sh
 
 This will initialize the input of data from OpenICE as well as start the webserver with the running information. It interacts on its own with the SQLite instance, which allows us to store our credentials and schedules.
-
-
-
-
