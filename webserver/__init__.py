@@ -228,8 +228,8 @@ def admin():
         return redirect('/')
 
     db = get_db()
-    cur = db.execute('SELECT username FROM users')
-    usernames = [u["username"] for u in cur.fetchall()]
+    cur = db.execute('SELECT username FROM users WHERE is_admin = 0')
+    usernames = [u["username"] for u in cur.fetchall() if u["username"] != "Guest"]
 
     return render_template('admin.html', usernames=usernames)
 
@@ -271,18 +271,19 @@ def get_tokens():
 
 @app.route("/admin/give_access", methods=['POST'])
 def give_access():
-    db = get_db()
-    db.execute('INSERT INTO user_access (username, access_begins, access_ends)'
-               ' VALUES (?, ?, ?)',
-               (
-                   request.form['username'],
-                   datetime.strptime(request.form['access_begins'],
-                                     "%Y-%m-%dT%H:%M"),
-                   datetime.strptime(request.form['access_ends'],
-                                     "%Y-%m-%dT%H:%M"),
-               ))
+    if request.form['username']:
+        db = get_db()
+        db.execute('INSERT INTO user_access (username, access_begins, access_ends)'
+                   ' VALUES (?, ?, ?)',
+                   (
+                       request.form['username'],
+                       datetime.strptime(request.form['access_begins'],
+                                         "%Y-%m-%dT%H:%M"),
+                       datetime.strptime(request.form['access_ends'],
+                                         "%Y-%m-%dT%H:%M"),
+                   ))
 
-    db.commit()
+        db.commit()
 
     return ('', 204)
 
