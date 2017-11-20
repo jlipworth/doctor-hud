@@ -20,12 +20,8 @@ First, we have to ensure that OpenICE is running.  There are two main ways to ge
 
    The latest release (0.6.3) can be downloaded `here
    <https://github.com/mdpnp/mdpnp/releases/tag/0.6.3>`_.
-<<<<<<< 3efe2e391185e2da3732f021e08ba0ccb4d697ca
 
 |
-=======
-   
->>>>>>> Documentation changes
 
 2. Compiling it from source. We have included a git submodule in our project under the openice directory. Compiling it necessary to run OpenICE on Linux.
 
@@ -70,9 +66,6 @@ To start the server:
 
    ./server.sh
 
-<<<<<<< 3efe2e391185e2da3732f021e08ba0ccb4d697ca
-This will initialize the input of data from OpenICE as well as start the webserver with the running information. It interacts on its own with the SQLite instance, which allows us to store our credentials and schedules.
-=======
 This will start the webserver and initialize the interface with OpenICE.  It interacts on its own with an SQLite database, which stores login credentials and access schedules.  A TLS certificate (**fullchain.pem** and **privkey.pem**) are required to run the server in production.  To test the server locally without TLS certificates, instead run:
 
 .. code-block:: bash
@@ -80,6 +73,3 @@ This will start the webserver and initialize the interface with OpenICE.  It int
    ./server.sh --no-init
 
 
-
-
->>>>>>> Documentation changes
