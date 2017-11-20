@@ -212,8 +212,8 @@ def create_account():
     database_query_result = cur.fetchone()
     if database_query_result is not None:
         # TODO "username taken" error
-        return redirect('/create_account',
-                        error_message="Account name is already in use.")
+        return render_template("create_account.html",
+                               error_message="Account name is already in use.")
 
     salt = os.urandom(64)
     password_hash = scrypt.hash(request.form['password'], salt)
