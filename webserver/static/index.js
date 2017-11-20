@@ -5,7 +5,7 @@ var useRandomData = false;
 function gauge(dom, input, name, max, colorStyle) {
     var option = {
         tooltip : {
-            formatter: "{a} <br/>{b} : {c}%"
+            formatter: "{a} : {c}"
         },
         series: [
             {
