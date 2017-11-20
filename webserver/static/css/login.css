@@ -93,18 +93,16 @@ p {
 }
 #login, .logo{
     display:inline-block;
-    width:40%;
 }
 #login{
-border-right:1px solid #fff;
-  padding: 0px 22px;
-  width: 59%;
+border-top:1px solid #fff;
+  padding: 25px 22px;
+  width: 100%;
 }
 .logo{
 color:#fff;
 font-size:50px;
 line-height: 125px;
-margin-left: 30px;
 }
 
 #login form span.fa {
@@ -164,5 +162,9 @@ fieldset{
 }
 .middle {
   display: flex;
-  width: 600px;
+  width: 700px;
+}
+
+.loginToken {
+    margin-top: 65px;
 }

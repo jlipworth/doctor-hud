@@ -21,46 +21,46 @@
     {% endif %}
     <div class="container">
         <center>
-            <div class="middle">
-                <div id="login">
-                    <form action='/login' method='post' enctype='multipart/form-data'>
-                        <fieldset class="clearfix">
-                            <p ><span class="fa fa-user"></span><input type="text" name='username' id="inputUsername" class="form-control" placeholder="username" required autofocus></p>
-                            <p><span class="fa fa-lock"></span><input type="password" name='password' id="inputPassword" class="form-control" placeholder="password" required></p>
+            <div style="display: inline-block;">
+                <div class="logo">DoctorHUD
 
-                            <div>
-                                <span style="float:right;  display: inline-block;"><button class = "btn btn-success" type="submit">Sign in</button></span>
-                            </div>
-                        </fieldset>
-                        <div class="clearfix"></div>
-                    </form>
-                    <p style="color: white; text-align: center; font-weight: bold; font-size: 22px"> OR </p>
-                    <form action='/login_token' method='post' enctype='multipart/form-data'>
-                      <p>
-                        <span class="fa fa-ticket"></span>
-                        <input type="text" name="token" id="input_token" class="form-control" placeholder="token" required autofocus>
-                      </p>
-                      <button class="btn btn-success" style="float:right" type="submit">Sign in with token</button>
-                    </form>
-                    
                     <div class="clearfix"></div>
                 </div>
-                <div style="display: inline-block;">
-                  <div class="logo">DoctorHUD
-
-                    <div class="clearfix"></div>
-                  </div>
-                  
-                  <span style="text-align:left; float:left; line-height: 50px; padding: 0px 20px;">
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
+                <span style="text-align:left; line-height: 50px; padding: 10px 0px; margin-right:-23px; position: absolute; top:50px; right:243px;">
                     <a class="btn btn-info" href="/create_account" style="color: white">Sign up</a>
-                    <br/>
                     <a class="btn btn-info" href="https://jlipworth.github.io/doctor-hud/help/html/mainoperation.html#" style="color: white">Help</a>
-                  </span>
+                </span>
+            </div>
+            <div class="middle">
+                <div id="login">
+                    <div class = "row">
+                        <div class="col-md-5">
+                            <form action='/login' method='post' enctype='multipart/form-data'>
+                                <fieldset class="clearfix">
+                                    <p ><span class="fa fa-user"></span><input type="text" name='username' id="inputUsername" class="form-control" placeholder="username" required autofocus></p>
+                                    <p><span class="fa fa-lock"></span><input type="password" name='password' id="inputPassword" class="form-control" placeholder="password" required></p>
+
+                                    <div>
+                                        <span style="float:right;  display: inline-block;"><button class = "btn btn-success" type="submit">Sign in</button></span>
+                                    </div>
+                                </fieldset>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+                        <div class="col-md-2">
+                            <p style="margin-top: 50px; color: white; text-align: center; font-weight: bold; font-size: 22px"> OR </p>
+                        </div>
+                        <div class="col-md-5">
+                            <form class = "loginToken" action='/login_token' method='post' enctype='multipart/form-data'>
+                                <p>
+                                    <span class="fa fa-ticket"></span>
+                                    <input type="text" name="token" id="input_token" class="form-control" placeholder="token" required autofocus>
+                                </p>
+                                <button class="btn btn-success" style="float:right" type="submit">Sign in with token</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </center>
