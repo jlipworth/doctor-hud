@@ -53,13 +53,18 @@ Once the monitor is created, you can leave it hidden or you can double-click on 
 
 Webserver Startup
 -----------------
-Once all the prerequisites are installed, we need to navigate and startup the webserver. This is relatively simple as we bundle it into one script.
+Once all the prerequisites are installed (jdk and jfx will not be needed here), we need to setup and startup the webserver. This is relatively simple as we bundle it into two scripts -- both are located in the project root directory.
 
-To start the webserver, start from the project root directory and navigate to the **webserver** directory. Then, trigger the server script.
+Setting up the webserver only has to be done the first time to fetch python plugins that will run the webserver:
 
 .. code-block:: bash
 
-   cd webserver
+   ./setup.sh
+
+To start the webserver, start from the project root directory and navigate to the **webserver** directory. Then, trigger the server script:
+
+.. code-block:: bash
+
    ./server.sh
 
 This will initialize the input of data from OpenICE as well as start the webserver with the running information. It interacts on its own with the SQLite instance, which allows us to store our credentials and schedules.

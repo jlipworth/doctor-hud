@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Server Setup &mdash; doctorHUD 1.1 documentation</title>
+  <title>Server Setup &mdash; DoctorHUD 1.1 documentation</title>
   
 
   
@@ -35,9 +35,9 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="doctorHUD 1.1 documentation" href="index.html"/>
+    <link rel="top" title="DoctorHUD 1.1 documentation" href="index.html"/>
         <link rel="next" title="Client Setup" href="clientsetup.html"/>
-        <link rel="prev" title="Welcome to doctorHUD’s documentation!" href="masterdoc.html"/> 
+        <link rel="prev" title="Welcome to DoctorHUD’s documentation!" href="masterdoc.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -56,7 +56,7 @@
           
 
           
-            <a href="masterdoc.html" class="icon icon-home"> doctorHUD
+            <a href="masterdoc.html" class="icon icon-home"> DoctorHUD
           
 
           
@@ -122,7 +122,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="masterdoc.html">doctorHUD</a>
+          <a href="masterdoc.html">DoctorHUD</a>
         
       </nav>
 
@@ -210,10 +210,13 @@
 </div>
 <div class="section" id="webserver-startup">
 <h2>Webserver Startup<a class="headerlink" href="#webserver-startup" title="Permalink to this headline">¶</a></h2>
-<p>Once all the prerequisites are installed, we need to navigate and startup the webserver. This is relatively simple as we bundle it into one script.</p>
-<p>To start the webserver, start from the project root directory and navigate to the <strong>webserver</strong> directory. Then, trigger the server script.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> webserver
-./server.sh
+<p>Once all the prerequisites are installed (jdk and jfx will not be needed here), we need to setup and startup the webserver. This is relatively simple as we bundle it into two scripts – both are located in the project root directory.</p>
+<p>Setting up the webserver only has to be done the first time to fetch python plugins that will run the webserver:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>./setup.sh
+</pre></div>
+</div>
+<p>To start the webserver, start from the project root directory and navigate to the <strong>webserver</strong> directory. Then, trigger the server script:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>./server.sh
 </pre></div>
 </div>
 <p>This will initialize the input of data from OpenICE as well as start the webserver with the running information. It interacts on its own with the SQLite instance, which allows us to store our credentials and schedules.</p>
@@ -233,7 +236,7 @@
         <a href="clientsetup.html" class="btn btn-neutral float-right" title="Client Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="masterdoc.html" class="btn btn-neutral" title="Welcome to doctorHUD’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="masterdoc.html" class="btn btn-neutral" title="Welcome to DoctorHUD’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

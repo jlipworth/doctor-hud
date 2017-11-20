@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Remote Doctor Operation &mdash; doctorHUD 1.1 documentation</title>
+  <title>Remote Doctor Operation &mdash; DoctorHUD 1.1 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="doctorHUD 1.1 documentation" href="index.html"/>
+    <link rel="top" title="DoctorHUD 1.1 documentation" href="index.html"/>
         <link rel="next" title="Admin Operation" href="admin.html"/>
         <link rel="prev" title="Client Setup" href="clientsetup.html"/> 
 
@@ -56,7 +56,7 @@
           
 
           
-            <a href="masterdoc.html" class="icon icon-home"> doctorHUD
+            <a href="masterdoc.html" class="icon icon-home"> DoctorHUD
           
 
           
@@ -98,11 +98,13 @@
 <p class="caption"><span class="caption-text">Operation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Remote Doctor Operation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#connect-page">Connect Page</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-account">Creating Account</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#login-via-credentials">Login via Credentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#login-via-token">Login via Token</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#displaying-hiding-sensors">Displaying + Hiding Sensors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#moving-sensors">Moving Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#skype-integration">Skype Integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#logout">Logout</a></li>
 </ul>
 </li>
@@ -125,7 +127,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="masterdoc.html">doctorHUD</a>
+          <a href="masterdoc.html">DoctorHUD</a>
         
       </nav>
 
@@ -175,40 +177,49 @@
   <div class="section" id="remote-doctor-operation">
 <h1>Remote Doctor Operation<a class="headerlink" href="#remote-doctor-operation" title="Permalink to this headline">¶</a></h1>
 <p>The major functionality of the remote doctor’s web interface can be explained over a few different operations.</p>
+<div class="section" id="connect-page">
+<h2>Connect Page<a class="headerlink" href="#connect-page" title="Permalink to this headline">¶</a></h2>
+<p>Everything starts at the <a class="reference external" href="https://jlipworth.github.io/doctor-hud">connect page</a>. This is a drop-down to select what server we want to go to. It includes our online demo server, and a local option for users wanting to test it on their own machines.</p>
+<img alt="_images/connectpage.png" class="align-center" src="_images/connectpage.png" />
+</div>
 <div class="section" id="creating-account">
 <h2>Creating Account<a class="headerlink" href="#creating-account" title="Permalink to this headline">¶</a></h2>
 <p>To create permanent credentials as a doctor, a new account should be made. This can reached through the login page.</p>
-<p>&lt;insert image here&gt;</p>
+<img alt="_images/login-create.png" class="align-center" src="_images/login-create.png" />
 <p>Filling this form and submitting it will store these credentials to be used in the future.</p>
-<p>&lt;insert image here&gt;</p>
+<a class="reference internal image-reference" href="_images/login-signup.png"><img alt="_images/login-signup.png" class="align-center" src="_images/login-signup.png" style="width: 671.25px; height: 473.25px;" /></a>
 </div>
 <div class="section" id="login-via-credentials">
 <h2>Login via Credentials<a class="headerlink" href="#login-via-credentials" title="Permalink to this headline">¶</a></h2>
 <p>Logging in with credentials to a specific room requires a calendar slot to be setup in advance by an admin. If this has been setup, loggin in with credentials should bring the user directly to the sensor display for the particular room.</p>
-<p>&lt;insert image here&gt;</p>
+<img alt="_images/login-credentials.png" class="align-center" src="_images/login-credentials.png" />
 </div>
 <div class="section" id="login-via-token">
 <h2>Login via Token<a class="headerlink" href="#login-via-token" title="Permalink to this headline">¶</a></h2>
 <p>When immediate assistance is required, sometimes there isn’t enough time to assign a calendar slot, or setup a new account if the remote doctor does not have one yet. Admins can create temporary tokens for a specific room, which can be used in a different field at the login screen.</p>
-<p>&lt;insert image here&gt;</p>
+<img alt="_images/login-token.png" class="align-center" src="_images/login-token.png" />
 </div>
 <div class="section" id="displaying-hiding-sensors">
 <h2>Displaying + Hiding Sensors<a class="headerlink" href="#displaying-hiding-sensors" title="Permalink to this headline">¶</a></h2>
-<p>The default display when first logged in is to display all the sensor data. If desired, the remote doctor can hide any of the sensors.</p>
-<p>&lt;insert image here&gt;</p>
+<p>The default display when first logged in is to display all the sensor data. If desired, the remote doctor can hide any of the sensors. Here is the default first column of sensors.</p>
+<a class="reference internal image-reference" href="_images/sensors-allshown.png"><img alt="_images/sensors-allshown.png" class="align-center" src="_images/sensors-allshown.png" style="width: 372.0px; height: 705.0px;" /></a>
 <p>Clicking hide on the heart rate sensor will result in:</p>
-<p>&lt;insert image here&gt;</p>
+<a class="reference internal image-reference" href="_images/sensors-hiddenheart.png"><img alt="_images/sensors-hiddenheart.png" class="align-center" src="_images/sensors-hiddenheart.png" style="width: 372.5px; height: 519.5px;" /></a>
 <p>Clicking show will return the view back to the first view.</p>
 </div>
 <div class="section" id="moving-sensors">
 <h2>Moving Sensors<a class="headerlink" href="#moving-sensors" title="Permalink to this headline">¶</a></h2>
 <p>The sensors can be moved around in the two separate columns. The entire sensor window is drag and drop, so the remote doctor can easily customize the display as they desire.</p>
-<p>&lt;insert image here&gt;</p>
+<img alt="_images/sensors-drag.png" class="align-center" src="_images/sensors-drag.png" />
+</div>
+<div class="section" id="skype-integration">
+<h2>Skype Integration<a class="headerlink" href="#skype-integration" title="Permalink to this headline">¶</a></h2>
+<p>&lt;Fill in&gt;</p>
 </div>
 <div class="section" id="logout">
 <h2>Logout<a class="headerlink" href="#logout" title="Permalink to this headline">¶</a></h2>
 <p>To logout of the session, click the logout button in the top banner:</p>
-<p>&lt;insert image here&gt;</p>
+<img alt="_images/sensors-logout.png" class="align-center" src="_images/sensors-logout.png" />
 <p>If previously logged in with credentials, as long as the time is still within the calendar slot, the user can log back in.</p>
 <p>If previously logged in with a temporary token, a new token will have to be generated to view again as the previous token has been used up.</p>
 </div>
