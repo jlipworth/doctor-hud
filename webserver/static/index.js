@@ -72,7 +72,8 @@ function line_chart(dom, input1, input2) {
                 }
             },
             legend: {
-                data:['Systolic','Diastolic']
+                data:['Systolic','Diastolic'],
+                selectedMode: false
             },
             xAxis: {
                 type : 'category',
@@ -88,6 +89,7 @@ function line_chart(dom, input1, input2) {
             },
             series: [
             {
+                cursor: 'default',
                 name: 'Systolic',
                 type: 'line',
                 label:{ normal:{show:true, fontSize: 18, position: [5, -20]} },
@@ -97,6 +99,7 @@ function line_chart(dom, input1, input2) {
                 data: [],
             },
             {
+                cursor: 'default',
                 name: 'Diastolic',
                 type: 'line',
                 label:{ normal:{show:true, fontSize: 18, position: [5, 10] } },
@@ -156,6 +159,7 @@ function bar(dom, input) {
           },
         series: [
             {
+                cursor: 'default',
                 name: 'SpO2',
                 type: 'bar',
                 stack: 'sum',
@@ -174,6 +178,7 @@ function bar(dom, input) {
                 data: [0]
             },
             {
+                cursor: 'default',
                 type: 'bar',
                 stack: 'sum',
                 itemStyle: {
