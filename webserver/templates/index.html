@@ -25,9 +25,6 @@
             <a onclick="Skype.tryAnalyzeSkypeUri('call', '0');" href="skype:{{ skype_account }}?call">
                 <img role="Button" src="static/callbutton_32px.png">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             <ul class="nav navbar-nav navbar-right">
                 {% if admin %}
                 <form action="/admin" method="get" id="admin-form" style="margin-bottom:0">
