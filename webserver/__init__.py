@@ -232,7 +232,7 @@ def create_account():
 @app.route("/admin", methods=['GET'])
 def admin():
     if not session.get("admin_logged_in", False):
-        return redirect('/')
+        return ('', 403)
 
     db = get_db()
     cur = db.execute('SELECT username FROM users WHERE is_admin = 0')
@@ -243,6 +243,9 @@ def admin():
 
 @app.route("/admin/generate_token", methods=['POST'])
 def generate_token():
+    if not session.get("admin_logged_in", False):
+        return ('', 403)
+
     tok = ''.join(str(ord(os.urandom(1)) % 10) for _ in range(12))
     # TODO custom expire time?
     expires = datetime.utcnow() + timedelta(minutes=5)
@@ -258,6 +261,9 @@ def generate_token():
 
 @app.route("/admin/get_tokens", methods=['GET'])
 def get_tokens():
+    if not session.get("admin_logged_in", False):
+        return ('', 403)
+
     db = get_db()
 
     db.execute('DELETE FROM tokens WHERE time_expires < ?',
@@ -278,6 +284,9 @@ def get_tokens():
 
 @app.route("/admin/give_access", methods=['POST'])
 def give_access():
+    if not session.get("admin_logged_in", False):
+        return ('', 403)
+
     if request.form['username']:
         db = get_db()
         db.execute('INSERT INTO user_access (username, access_begins, access_ends)'
@@ -297,6 +306,9 @@ def give_access():
 
 @app.route("/admin/get_accesses", methods=['GET'])
 def get_accesses():
+    if not session.get("admin_logged_in", False):
+        return ('', 403)
+
     db = get_db()
 
     db.execute('DELETE FROM user_access WHERE access_ends < ?',
