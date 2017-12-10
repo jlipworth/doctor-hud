@@ -243,7 +243,7 @@ $(document).ready(function() {
     var input = '';
     var drake = dragula([document.getElementById('sensor1'), document.getElementById('sensor2')])
     bar(document.getElementById('SpO2'), 'sp_o2');
-    gauge(document.getElementById('etCO2'), 'etCO2', 'etCO2', '(%)', 60, [[0.5833, '#9b9b9b'],[0.75, '#ffcc00'],[1, '#9b9b9b']]);
+    gauge(document.getElementById('etCO2'), 'etCO2', 'etCO2', '(mmHg)', 60, [[0.5833, '#9b9b9b'],[0.75, '#ffcc00'],[1, '#9b9b9b']]);
     gauge(document.getElementById('respiration_rate'), 'respiration_rate', 'respiration rate', '(BPM)', 25, [[0.4, '#9b9b9b'],[0.8, '#ffcc00'],[1, '#9b9b9b']]);
     gauge(document.getElementById('heart_rate'), 'heart_rate', 'heart rate', '(BPM)', 150, [[0.33, '#9b9b9b'],[0.66, '#ffcc00'],[1, '#ff4500']]);
     line_chart(document.getElementById('line_chart'), 'systolic', 'diastolic');
