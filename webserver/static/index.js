@@ -1,6 +1,7 @@
 var obj;
 var metric_dict = {};
 var useRandomData = false;
+var last_saved_note;
 
 function gauge(dom, input, name, max, colorStyle) {
     var option = {
@@ -243,4 +244,13 @@ $(document).ready(function() {
     gauge(document.getElementById('respiration_rate'), 'respiration_rate', 'respiration rate', 25, [[0.4, '#9b9b9b'],[0.8, '#ffcc00'],[1, '#9b9b9b']]);
     gauge(document.getElementById('heart_rate'), 'heart_rate', 'heart rate', 150, [[0.33, '#9b9b9b'],[0.66, '#ffcc00'],[1, '#ff4500']]);
     line_chart(document.getElementById('line_chart'), 'systolic', 'diastolic');
+
+    last_saved_note = $("#doctornotes").val();
+
+    setInterval(function() {
+        if ($("#doctornotes").val() != last_saved_note) {
+            last_saved_note = $("#doctornotes").val();
+            $.post("/save_note", {doctornote: last_saved_note});
+        }
+    }, 2000);
 });

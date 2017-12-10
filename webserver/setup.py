@@ -30,6 +30,12 @@ CREATE TABLE user_access (
 )''')
 
 db.execute('''
+CREATE TABLE saved_notes (
+    username TEXT NOT NULL PRIMARY KEY,
+    note TEXT NOT NULL
+)''')
+
+db.execute('''
 CREATE TABLE tokens (
     token TEXT NOT NULL PRIMARY KEY,
     time_expires TIMESTAMP NOT NULL,
@@ -43,27 +49,33 @@ CREATE TABLE skype_account (
 
 admin_salt = os.urandom(64)
 db.execute('''
-REPLACE INTO users (username, password_hash, password_salt, is_admin)
+INSERT INTO users (username, password_hash, password_salt, is_admin)
     VALUES (?, ?, ?, ?)''',
-           ("admin", scrypt.hash(admin_password, admin_salt), admin_salt, 1))
+           (admin_username, scrypt.hash(admin_password, admin_salt), admin_salt, 1))
 
 # "Guest" account for token login, can't actually log in directly
 db.execute('''
-REPLACE INTO users (username, password_hash, password_salt, is_admin)
+INSERT INTO users (username, password_hash, password_salt, is_admin)
     VALUES (?, ?, ?, ?)''',
            ("Guest", os.urandom(128), b"\0", 0))
 
 db.execute('''
-REPLACE INTO user_access (username, access_begins, access_ends)
+INSERT INTO user_access (username, access_begins, access_ends)
     VALUES (?, ?, ?)''',
-           ("admin", datetime.min, datetime.max.replace(microsecond=0)))
+           (admin_username, datetime.min, datetime.max.replace(microsecond=0)))
 
 db.execute('''
-REPLACE INTO user_access (username, access_begins, access_ends)
+INSERT INTO user_access (username, access_begins, access_ends)
     VALUES (?, ?, ?)''',
            ("Guest", datetime.min, datetime.max.replace(microsecond=0)))
 
-db.execute('''REPLACE INTO skype_account (account_name) VALUES (?)''',
+db.execute('INSERT INTO saved_notes (username, note) VALUES (?, ?)',
+           (admin_username, ""))
+
+db.execute('INSERT INTO saved_notes (username, note) VALUES (?, ?)',
+           ("Guest", ""))
+
+db.execute('''INSERT INTO skype_account (account_name) VALUES (?)''',
            (skype_account,))
 
 db.commit()

@@ -113,6 +113,8 @@ def index():
     if 'logged_in_username' not in session:
         return redirect('/login')
 
+    admin = session.get("admin_logged_in", False)
+
     now = datetime.utcnow()
     db = get_db()
     cur = db.execute('SELECT * FROM user_access WHERE username=?',
@@ -130,12 +132,14 @@ def index():
     cur = db.execute('SELECT * FROM skype_account')
     skype_account = cur.fetchone()['account_name']
 
-    if session.get("admin_logged_in", False):
-        return render_template('index.html',
-                               admin=True, skype_account=skype_account)
+    cur = db.execute('SELECT note FROM saved_notes WHERE username=?',
+                     (session['logged_in_username'],))
+    note = cur.fetchone()['note']
 
     return render_template('index.html',
-                           admin=False, skype_account=skype_account)
+                           admin=admin,
+                           doctornotes=note,
+                           skype_account=skype_account)
 
 @app.route("/login", methods=['GET'])
 def login_page():
@@ -206,9 +210,11 @@ def create_account_page():
 
 @app.route("/create_account", methods=['POST'])
 def create_account():
+    username = request.form['username']
+
     db = get_db()
     cur = db.execute('SELECT * FROM users WHERE username=?',
-                     (request.form['username'],))
+                     (username,))
     database_query_result = cur.fetchone()
     if database_query_result is not None:
         # TODO "username taken" error
@@ -220,13 +226,29 @@ def create_account():
 
     db.execute('INSERT INTO users (username, password_hash, password_salt, is_admin)'
                'VALUES (?, ?, ?, ?)',
-               (request.form['username'], password_hash, salt, 0))
+               (username, password_hash, salt, 0))
+    db.execute('INSERT INTO saved_notes (username, note) VALUES (?, ?)',
+               (username, ""))
 
     db.commit()
 
     session['logged_in_username'] = request.form['username']
     session['admin_logged_in'] = False
     return redirect('/')
+
+
+@app.route("/save_note", methods=['POST'])
+def save_note():
+    username = session.get("logged_in_username", "Guest")
+    if username == "Guest":
+        return ('', 403)
+
+    db = get_db()
+    db.execute('UPDATE saved_notes SET note=? WHERE username=?',
+               (request.form['doctornote'], username))
+    db.commit()
+
+    return ('', 204)
 
 
 @app.route("/admin", methods=['GET'])
