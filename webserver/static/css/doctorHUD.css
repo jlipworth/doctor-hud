@@ -25,17 +25,5 @@
 }
 
 h1, h2, h3, h4, h5, h6, .newFont{
-    font-family: 'Sumana', serif;
-}
-
-a.fake_button {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    text-decoration: none;
-    color: initial;
-
-    border-radius: 20 !important;
-    -webkit-border-radius: 20 !important;
-    -moz-border-radius: 20 !important;
+    font-family: 'Oxygen', serif;
 }
