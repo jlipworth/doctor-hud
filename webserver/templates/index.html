@@ -14,18 +14,20 @@
     <script src="static/index.js"></script>
     <link rel="stylesheet" href="/static/css/doctorHUD.css">
     <link rel="stylesheet" href="static/css/dragula.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Sumana" rel="stylesheet"><!--Change font-->
 </head>
 
-<body>
+<body style="background: #c9e7ff">
     <script src="static/dragula.js"></script>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark sensorCard">
         <div class="container-fluid">
-            <div class="navbar-brand">DoctorHUD</div>
+            <div class="navbar-brand newFont">DoctorHUD</div>
             <!-- <script type="text/javascript" src="https://cdn.dev.skype.com/uri/skype-uri.js"></script> -->
             <a onclick="Skype.tryAnalyzeSkypeUri('call', '0');" href="skype:{{ skype_account }}?call">
                 <img role="Button" src="static/callbutton_32px.png">
             </a>
-            <ul class="nav navbar-nav navbar-right" style="flex-direction: row">
+            <ul class="nav navbar-nav navbar-right newFont" style="flex-direction: row">
                 {% if admin %}
                 <form action="/admin" method="get" id="admin-form" style="margin-bottom:0">
                     <button class="btn btn-default navbar-btn titleButton" type="submit">Admin Page</button>
