@@ -25,14 +25,16 @@
               
 
               <p class="lead">
-                <div class="description"> Select server: </div>
+                <div class="description"> Select hospital room: </div>
                 <form action="javascript:void(0);" onsubmit="submit_connect()">
                   <select id="server-dropdown">
                     <option value="">--</option>
-                    <option value="https://fusxfaranto.com:8080">Online Test Server</option>
-                    <option value="http://127.0.0.1:8080">Local Test Server</option>
-                    <option value="https://0.1.2.3:8080">Fake Hospital #1</option>
-                    <option value="https://example.com:8080">Fake Hospital #2</option>
+                    <option value="https://fusxfaranto.com:8080">UM Pidiatrics ER</option>
+                    <option value="https://umpidiatric:8080">UM Pidiatrics Rm1629</option>
+                    <option value="https://umhealthcare.com:8080">UM Healthcare Center ER</option>          
+                    <option value="https://umhealthcare.com:8000">UM Healthcare Center ICU1</option>
+                    <option value="https://umcancercenter.com:8080">Comprehensive Cancer Center ICU1</option>
+                    <option value="http://127.0.0.1:8080">Local Test Room</option>
                   </select>
                   <input type="text" name="address" id="address">
                   <br/>
