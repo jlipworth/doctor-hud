@@ -3,7 +3,7 @@ var metric_dict = {};
 var useRandomData = false;
 var last_saved_note;
 
-function gauge(dom, input, name, max, colorStyle) {
+function gauge(dom, input, name, unit, max, colorStyle) {
     var option = {
         tooltip : {
             formatter: "{a} : {c}"
@@ -16,9 +16,9 @@ function gauge(dom, input, name, max, colorStyle) {
                 width: '100%',
                 height: '100%',
                 detail: {formatter:'{value}'},
-                data: [{value: 0}],
+                data: [{value: 0, name: unit}],
                 title : {
-                    offsetCenter: [0, 70]
+                    offsetCenter: [0, 60]
                 },
                 pointer : {
                     width : 4
@@ -82,7 +82,10 @@ function line_chart(dom, input1, input2) {
                 data : []
             },
             yAxis: {
+                name: '(mmHg)',
                 type: 'value',
+                max: 160,
+                min: 40,
                 boundaryGap: [0, '100%'],
                 splitLine: {
                     show: false
@@ -240,9 +243,9 @@ $(document).ready(function() {
     var input = '';
     var drake = dragula([document.getElementById('sensor1'), document.getElementById('sensor2')])
     bar(document.getElementById('SpO2'), 'sp_o2');
-    gauge(document.getElementById('etCO2'), 'etCO2', 'etCO2', 60, [[0.5833, '#9b9b9b'],[0.75, '#ffcc00'],[1, '#9b9b9b']]);
-    gauge(document.getElementById('respiration_rate'), 'respiration_rate', 'respiration rate', 25, [[0.4, '#9b9b9b'],[0.8, '#ffcc00'],[1, '#9b9b9b']]);
-    gauge(document.getElementById('heart_rate'), 'heart_rate', 'heart rate', 150, [[0.33, '#9b9b9b'],[0.66, '#ffcc00'],[1, '#ff4500']]);
+    gauge(document.getElementById('etCO2'), 'etCO2', 'etCO2', '(%)', 60, [[0.5833, '#9b9b9b'],[0.75, '#ffcc00'],[1, '#9b9b9b']]);
+    gauge(document.getElementById('respiration_rate'), 'respiration_rate', 'respiration rate', '(BPM)', 25, [[0.4, '#9b9b9b'],[0.8, '#ffcc00'],[1, '#9b9b9b']]);
+    gauge(document.getElementById('heart_rate'), 'heart_rate', 'heart rate', '(BPM)', 150, [[0.33, '#9b9b9b'],[0.66, '#ffcc00'],[1, '#ff4500']]);
     line_chart(document.getElementById('line_chart'), 'systolic', 'diastolic');
 
     last_saved_note = $("#doctornotes").val();
