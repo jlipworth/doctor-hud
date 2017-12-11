@@ -63,6 +63,14 @@ Sensors can be moved up and down, as well as between the two columns. All sensor
    :align: center
 
 
+Patient Notes
+-------------
+Notes can be saved for each patient. Saving automatically happens every two seconds.
+
+.. image:: pictures/sensors-notes.png
+   :align: center
+
+
 Skype Integration
 -----------------
 Skype web control is integrated as part of the web application.  A first-time user needs to sign in with their own Skype account. 
